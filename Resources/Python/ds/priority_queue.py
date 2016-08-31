@@ -2,10 +2,18 @@ from ds.heap import BinHeap
 
 
 class PriorityQueue:
-    def __init__(self):
-        self.heap = BinHeap()
+    def __init__(self, data=None):
+        self.heap = BinHeap(data)
 
-    def insert(self, key, item):
+    def push(self, key, item):
         self.heap.push((key, item))
 
-    def
+    def pop(self):
+        return self.heap.pop()
+
+    def peek(self):
+        return self.heap.peek()
+
+    @property
+    def is_empty(self):
+        return self.heap.is_empty()
