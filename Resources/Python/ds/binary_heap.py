@@ -1,10 +1,17 @@
+def heapify(lst):
+    i = len(lst) // 2
+    heap = BinHeap()
+    heap.size = len(lst)
+    heap.data = [[None]] + [list(i) for i in lst]
+    while i > 0:
+        heap.shift_down(i)
+        i -= 1
+    return heap
+
 class BinHeap:  # Min heap
-    def __init__(self, lst=None):
-        if lst is not None:
-            self.heapify(lst)
-        else:
-            self.data = [0]  # never accessed (0th index just to make accessing simpler)
-            self.size = 0
+    def __init__(self):
+        self.data = [None]  # never accessed (0th index just to make accessing simpler)
+        self.size = 0
 
     def push(self, value):
         self.data.append(value)
@@ -51,10 +58,13 @@ class BinHeap:  # Min heap
     def is_empty(self):
         return self.size == 0
 
-    def heapify(self, lst):
-        i = len(lst) // 2
-        self.size = len(lst)
-        self.data = [(0, 0)] + [tuple(i) for i in lst]
-        while i > 0:
-            self.shift_down(i)
-            i -= 1
+    def decrease_key(self, value, new_key):
+        item_index = 0
+        for i in range(1, self.size + 1):
+            if self.data[i][1] == value:
+                self.data[i][0] = new_key
+                item_index = i
+                break
+        self.shift_up(item_index)
+
+

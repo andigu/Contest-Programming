@@ -1,9 +1,12 @@
-from ds.heap import BinHeap
+from ds.binary_heap import *
 
 
 class PriorityQueue:
     def __init__(self, data=None):
-        self.heap = BinHeap(data)
+        if data is not None:
+            self.heap = heapify(data)
+        else:
+            self.heap = BinHeap()
 
     def push(self, key, item):
         self.heap.push((key, item))
@@ -14,6 +17,11 @@ class PriorityQueue:
     def peek(self):
         return self.heap.peek()
 
+    def decrease_key(self, value, new_key):
+        self.heap.decrease_key(value, new_key)
+
     @property
     def is_empty(self):
         return self.heap.is_empty()
+
+
