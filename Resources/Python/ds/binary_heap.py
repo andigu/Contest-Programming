@@ -2,8 +2,8 @@ def heapify(lst):
     i = len(lst) // 2
     heap = BinHeap()
     heap.size = len(lst)
-    heap.data = [[None]] + [list(i) for i in lst]
-    heap.indices = {lst[i][1]: i + 1 for i in range(len(lst))}
+    heap.data = [[None]] + lst
+    heap.indices = {lst[i][1]: i + 1 for i in range(heap.size)}
     while i > 0:
         heap.shift_down(i)
         i -= 1

@@ -1,21 +1,30 @@
+import sys
+
 from ds.priority_queue import PriorityQueue
+
 
 def dijkstra(graph, start=0, n=None):
     if n is None:
         n = len(graph)
-    dist = [float("inf")] * n
+    dist = [infinity] * n
     dist[start] = 0
-    unvisited = {i for i in range(n)}  # inefficient!
-    queue = PriorityQueue([(dist[i], i) for i in unvisited])
-
+    queue = PriorityQueue([[dist[i], i] for i in range(vertices)])
     while not queue.is_empty:
-        current = queue.pop()
-        unvisited.remove(current)
+        current = queue.pop()[1]
         for neighbour in graph[current]:
             temp = dist[current] + graph[current][neighbour]
             if temp < dist[neighbour]:
                 dist[neighbour] = temp
-        current = PriorityQueue([(dist[i], i) for i in unvisited])
+                queue.increase_priority(neighbour, temp)
+    return dist
 
-    return dist[-1]
 
+input = sys.stdin.readline
+vertices, edges = [int(i) for i in input().split()]
+graph = [{} for i in range(vertices)]
+infinity = float("inf")
+for i in range(edges):
+    a, b, weight = [int(i) for i in input().split()]
+    graph[a - 1][b - 1] = min(graph[a - 1].get(b - 1, infinity), weight)
+    graph[b - 1][a - 1] = min(graph[b - 1].get(a - 1, infinity), weight)
+print("\n".join([str(i) if i != infinity else "-1" for i in dijkstra(graph)]))
