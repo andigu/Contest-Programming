@@ -17,11 +17,9 @@ class PriorityQueue:
     def peek(self):
         return self.heap.peek()
 
-    def decrease_key(self, value, new_key):
+    def increase_priority(self, value, new_key):
         self.heap.decrease_key(value, new_key)
 
     @property
     def is_empty(self):
         return self.heap.is_empty()
-
-
