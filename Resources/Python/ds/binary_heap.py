@@ -9,6 +9,7 @@ def heapify(lst):
         i -= 1
     return heap
 
+
 class BinHeap:  # Min heap
     def __init__(self):
         self.data = [None]  # never accessed (0th index just to make accessing simpler)
@@ -65,5 +66,3 @@ class BinHeap:  # Min heap
         item_index = self.indices[value]
         self.data[item_index][0] = new_key
         self.shift_up(item_index)
-
-
