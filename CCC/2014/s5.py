@@ -1,8 +1,10 @@
+# TODO Solve in Java (this one TLE's)
+
 import sys
 
-all_data = [[0, 0]] + [[int(i) for i in j.split()] for j in sys.stdin.read().split("\n")]
-n = int(all_data[1][0]) + 1
-pts = [[0, 0]] + [[int(i) for i in j.split()] for j in all_data[1:-1]]
+input = sys.stdin.readline
+n = int(input()) + 1
+pts = [[0, 0]] + [[int(i) for i in input().split()] for j in range(n)]
 pairs = sorted(
     [[(pts[a][0] - pts[b][0]) ** 2 + (pts[a][1] - pts[b][1]) ** 2, a, b] for a in range(n) for b in range(a + 1, n)])
 best = [0] * n
