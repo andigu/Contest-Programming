@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CCC/2014/2014.iml" filepath="$PROJECT_DIR$/CCC/2014/2014.iml" group="Contest Programming/CCC" />
+      <module fileurl="file://$PROJECT_DIR$/CCC/2015/2015.iml" filepath="$PROJECT_DIR$/CCC/2015/2015.iml" group="Contest Programming/CCC" />
+      <module fileurl="file://$PROJECT_DIR$/Resources/Java/Java.iml" filepath="$PROJECT_DIR$/Resources/Java/Java.iml" group="Contest Programming/Hackpack" />
+      <module fileurl="file://$PROJECT_DIR$/Resources/Notes/Notes.iml" filepath="$PROJECT_DIR$/Resources/Notes/Notes.iml" group="Contest Programming/Hackpack" />
+      <module fileurl="file://$PROJECT_DIR$/Resources/Python/Python.iml" filepath="$PROJECT_DIR$/Resources/Python/Python.iml" group="Contest Programming/Hackpack" />
+      <module fileurl="file://$PROJECT_DIR$/DMOJ/dp/dp.iml" filepath="$PROJECT_DIR$/DMOJ/dp/dp.iml" group="Contest Programming/DMOJ" />
+      <module fileurl="file://$PROJECT_DIR$/DMOJ/ds/ds.iml" filepath="$PROJECT_DIR$/DMOJ/ds/ds.iml" group="Contest Programming/DMOJ" />
+      <module fileurl="file://$PROJECT_DIR$/DMOJ/graph/graph.iml" filepath="$PROJECT_DIR$/DMOJ/graph/graph.iml" group="Contest Programming/DMOJ" />
+      <module fileurl="file://$PROJECT_DIR$/DMOJ/math/math.iml" filepath="$PROJECT_DIR$/DMOJ/math/math.iml" group="Contest Programming/DMOJ" />
+    </modules>
+  </component>
+</project>
