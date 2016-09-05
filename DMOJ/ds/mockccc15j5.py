@@ -26,19 +26,10 @@ def bisect_v(x):
 
 input = sys.stdin.readline
 n_buildings = int(input())
-buildings = set()
-add = buildings.add
-for i in range(n_buildings):
-    a, b = input().split()
-    add((int(a), int(b)))
+buildings = {tuple(int(i) for i in input().split()) for j in range(n_buildings)}
 
 n_turnings = int(input())
-turnings = []
-append = turnings.append
-for i in range(n_turnings):
-    a, b = input().split()
-    append((int(a), int(b)))
-
+turnings = [tuple(int(i) for i in input().split()) for j in range(n_turnings)]
 horizontal = sorted(buildings)
 vertical = sorted((i[1], i[0]) for i in buildings)
 result = 0
@@ -51,9 +42,9 @@ for i in range(n_turnings - 1):
         if turnings[i + 1] not in dp_h:
             dp_h[turnings[i + 1]] = bisect_h(turnings[i + 1])
         if turnings[i][1] > turnings[i + 1][1]:
-            result += dp_h[turnings[i]] - dp_h[turnings[i + 1]] + (1 if turnings[i + 1] in buildings else 0)
+            result += dp_h[turnings[i]] - dp_h[turnings[i + 1]] + (turnings[i + 1] in buildings)
         else:
-            result += dp_h[turnings[i + 1]] - dp_h[turnings[i]] + (1 if turnings[i] in buildings else 0)
+            result += dp_h[turnings[i + 1]] - dp_h[turnings[i]] + (turnings[i] in buildings)
     else:
         if turnings[i] not in dp_v:
             dp_v[turnings[i]] = bisect_v(turnings[i])
@@ -61,7 +52,8 @@ for i in range(n_turnings - 1):
             dp_v[turnings[i + 1]] = bisect_v(turnings[i + 1])
 
         if turnings[i][0] > turnings[i + 1][0]:
-            result += dp_v[turnings[i]] - dp_v[turnings[i + 1]] + (1 if turnings[i + 1] in buildings else 0)
+            result += dp_v[turnings[i]] - dp_v[turnings[i + 1]] + (turnings[i + 1] in buildings)
         else:
-            result += dp_v[turnings[i + 1]] - dp_v[turnings[i]] + (1 if turnings[i] in buildings else 0)
+            result += dp_v[turnings[i + 1]] - dp_v[turnings[i]] + (turnings[i] in buildings)
+
 print(result)
