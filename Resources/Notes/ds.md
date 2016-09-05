@@ -3,10 +3,10 @@ Difference Arrays
 Given an array of numbers, we can construct a new array by replacing each element by the difference between itself 
 and the previous element, except for the first element, which we simply ignore. This is called the difference array,
 because it contains the first differences of the original array. For example, the array `[9, 2, 6, 3, 1, 5, 0 7]` is 
-converted to `[-7, 4, -3, -2, 4, -5, 7]`. Pseudocode to convert an array `A` to its difference array `D(A)`:
+converted to `[-7, 4, -3, -2, 4, -5, 7]`. To convert an array `A` of length `n` to its difference array `D(A)`:
 ```
-for (int i = 0; i < n-1; i++)
-    D[i] = A[i+1] - A[i];
+for i in range(n):
+    D[i] = A[i+1] - A[i]
 ```
 [Read more on the WCIPEG wiki](http://wcipeg.com/wiki/Prefix_sum_array_and_difference_array) <br />
 
@@ -21,3 +21,22 @@ If we have array `A` and add an increment `k` to elements
 
 Thus, if we are required to update many ranges of an array in this manner, we should keep track of `D` rather than `A` 
 itself, and then integrate at the end to reconstruct `A`.
+
+Coordinate Compression
+======================
+Coordinate compression is a procedure that takes some points and reassigns their coordinates to remove "gaps". 
+For example, if point `P1` is located at `x = 5`, point `P2` is located at `x = 27`, and point `P3` is located at 
+`x = 65`, then, after coordinate compression, P1 may be located at `x = 0`, `P2` may be located at `x = 1`, and `P3` 
+may be located at `x = 2`. The reason we compress coordinates is to get rid of all the "empty space" between points. 
+This makes it easier to, say, use the coordinates as indices into an array. If we used the original numbers, 
+we'd waste a lot of entries.
+
+To perform coordinate compression, you make a list of all the coordinates and sort them in ascending order.
+This gives you the rank of each coordinate. You then replace each coordinate by its rank. This takes `O(N log N)` time, 
+so it's pretty efficient. To compress a list of `n` coordinates `C`:
+```
+x = [value: index for index, value in enumerate(sorted(i[0] for i in C))}
+y = [value: index for index, value in enumerate(sorted(i[1] for i in C))}
+for i in range(n):
+    C[i][0] = x[i]
+    C[i][1] = y[i]
