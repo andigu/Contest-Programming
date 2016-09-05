@@ -35,8 +35,8 @@ To perform coordinate compression, you make a list of all the coordinates and so
 This gives you the rank of each coordinate. You then replace each coordinate by its rank. This takes `O(N log N)` time, 
 so it's pretty efficient. To compress a list of `n` coordinates `C`:
 ```
-x = [value: index for index, value in enumerate(sorted(i[0] for i in C))}
-y = [value: index for index, value in enumerate(sorted(i[1] for i in C))}
+x = [value: index for index, value in enumerate(sorted(set(i[0] for i in C)))}
+y = [value: index for index, value in enumerate(sorted(set(i[1] for i in C)))}
 for i in range(n):
     C[i][0] = x[i]
     C[i][1] = y[i]
