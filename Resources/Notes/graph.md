@@ -1,5 +1,7 @@
 Dijkstra's Algorithm
 ====================
+Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph. Its procedure is as 
+follows:
 1. Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other 
 nodes.
 2. Set the initial node as current. Mark all other nodes unvisited. Create a set of all the unvisited nodes called the 
@@ -36,3 +38,47 @@ function Dijkstra(Graph, source):
                 prev[v] ← u 
     return dist[], prev[]
 ```
+
+Kruskal's Algorithm
+===================
+Kruskal's algorithm is a minimum-spanning-tree algorithm which finds an edge of the least possible weight that connects
+any two trees in the forest. It is a greedy algorithm in graph theory as it finds a minimum spanning tree for a 
+connected weighted graph adding increasing cost arcs at each step. This means it finds a subset of the edges that 
+forms a tree that includes every vertex, where the total weight of all the edges in the tree is minimized. If the graph
+is not connected, then it finds a minimum spanning forest (a minimum spanning tree for each connected component).
+1. Create a forest `F` (a set of trees), where each vertex in the graph is a separate tree
+2. Create a set `S` containing all the edges in the graph
+3. While `S` is nonempty and F is not yet spanning
+    1. Remove an edge with minimum weight from `S`
+    2. If the removed edge connects two different trees then add it to the forest `F`, combining two trees into a 
+    single tree
+```
+A = ∅
+foreach v ∈ vertices:
+    MAKE-SET(v)
+foreach (u, v) in edges ordered by weight(u, v), increasing:
+    if FIND-SET(u) ≠ FIND-SET(v):
+        A = A ∪ {(u, v)}
+        UNION(u, v)
+return A
+```
+    
+Prim's Algorithm
+================
+Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph. This means
+it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in
+the tree is minimized. The algorithm operates by building this tree one vertex at a time, from an arbitrary starting 
+vertex, at each step adding the cheapest possible connection from the tree to another vertex.
+1. Associate with each vertex `v` of the graph a number `C[v]` (the cheapest cost of a connection to `v`) and an edge 
+`E[v]` (the edge providing that cheapest connection). To initialize these values, set all values of `C[v]` to `∞` and 
+set each `E[v]` to a special flag value indicating that there is no edge connecting `v` to earlier vertices.
+2. Initialize an empty forest `F` and a set `Q` of vertices that have not yet been included in `F` (initially, all 
+vertices)
+3. Repeat the following steps until `Q` is empty:
+    1. Find and remove a vertex `v` from `Q` having the minimum possible value of `C[v]`
+    2. Add `v` to `F` and, if `E[v]` is not the special flag value, also add `E[v]` to `F`
+    3. Loop over the edges `vw` connecting `v` to other vertices `w`. For each such edge, if `w` still belongs to `Q` 
+    and `vw` has smaller weight than `C[w]`, perform the following steps:
+        1. Set `C[w]` to the cost of edge `vw`
+        2. Set `E[w]` to point to edge `vw`
+4. Return `F`

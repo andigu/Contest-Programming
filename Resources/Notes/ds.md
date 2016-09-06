@@ -40,3 +40,18 @@ y = [value: index for index, value in enumerate(sorted(set(i[1] for i in C)))}
 for i in range(n):
     C[i][0] = x[i]
     C[i][1] = y[i]
+```
+
+Disjoint Sets
+=============
+A disjoint-set data structure, also called a union–find data structure or merge–find set, is a data structure that 
+keeps track of a set of elements partitioned into a number of disjoint (nonoverlapping) subsets. It supports two 
+operations:
+* Find: Determine which subset a particular element is in. Find typically returns an item from this set that serves as
+its "representative"; by comparing the result of two Find operations, one can determine whether two elements are in 
+the same subset.
+* Union: Join two subsets into a single subset.
+
+One common approach is to select a fixed element of each set, called its representative, to represent the set as a
+whole. Then, find(x) returns the representative of the set that x belongs to, and Union takes two set representatives
+as its arguments.
