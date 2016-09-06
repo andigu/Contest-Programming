@@ -2,6 +2,7 @@ Dijkstra's Algorithm
 ====================
 Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph. Its procedure is as 
 follows:
+
 1. Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other 
 nodes.
 2. Set the initial node as current. Mark all other nodes unvisited. Create a set of all the unvisited nodes called the 
@@ -46,6 +47,7 @@ any two trees in the forest. It is a greedy algorithm in graph theory as it find
 connected weighted graph adding increasing cost arcs at each step. This means it finds a subset of the edges that 
 forms a tree that includes every vertex, where the total weight of all the edges in the tree is minimized. If the graph
 is not connected, then it finds a minimum spanning forest (a minimum spanning tree for each connected component).
+
 1. Create a forest `F` (a set of trees), where each vertex in the graph is a separate tree
 2. Create a set `S` containing all the edges in the graph
 3. While `S` is nonempty and F is not yet spanning
@@ -69,6 +71,7 @@ Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a 
 it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in
 the tree is minimized. The algorithm operates by building this tree one vertex at a time, from an arbitrary starting 
 vertex, at each step adding the cheapest possible connection from the tree to another vertex.
+
 1. Associate with each vertex `v` of the graph a number `C[v]` (the cheapest cost of a connection to `v`) and an edge 
 `E[v]` (the edge providing that cheapest connection). To initialize these values, set all values of `C[v]` to `∞` and 
 set each `E[v]` to a special flag value indicating that there is no edge connecting `v` to earlier vertices.
