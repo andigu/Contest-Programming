@@ -1,3 +1,5 @@
+# TODO Implement backtrack for finding paths
+
 import sys
 
 from ds.priority_queue import PriorityQueue
