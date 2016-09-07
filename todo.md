@@ -1,2 +1,0 @@
-- [ ] Add 'previous' trackers to Dijkstra (backtrack)
-- [ ] Solve 2014/s5.py in Java
