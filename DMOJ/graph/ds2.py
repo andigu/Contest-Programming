@@ -24,7 +24,7 @@ for i in range(1, e + 1):
         parent[find(a)] = parent[b]
         add(i)
         visited += 1
-if visited != v - 1:
+if visited != v - 1: # Spanning tree always has v - 1 edges
     print("Disconnected Graph")
 else:
     for i in ids:

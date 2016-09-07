@@ -1,5 +1,27 @@
+Graphs
+======
+A graph data structure consists of a set of vertices or nodes, together with a set of unordered pairs of these vertices 
+for an undirected graph or a set of ordered pairs for a directed graph. A graph data structure may also associate to 
+each edge some weight.
+The basic operations provided by a graph data structure usually include:
+
+* `adjacent(x, y)`: tests whether there is an edge from the vertices `x` to `y`
+* `neighbors(x)`: lists all vertices `y` such that there is an edge from the vertices `x` to `y`
+* `add_vertex(x)`: adds the vertex `x`, if it is not there
+* `remove_vertex(x)`: removes the vertex `x`, if it is there
+* `add_edge(x, y)`: adds the edge from the vertices `x` to `y`, if it is not there
+* `remove_edge(x, y)`: removes the edge from the vertices `x` to `y`, if it is there
+* `get_vertex_value(x)`: returns the value associated with the vertex `x`
+* `set_vertex_value(x, v)`: sets the value associated with the vertex `x` to `v`
+
+Structures that associate weights to the edges usually also provide:
+
+* `get_edge_value(x, y)`: returns the value associated with the edge `(x, y)`
+* `set_edge_value(x, y, v)`: sets the value associated with the edge `(x, y)` to `v`
+
+
 Dijkstra's Algorithm
-====================
+--------------------
 Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph. Its procedure is as 
 follows:
 
@@ -9,9 +31,9 @@ nodes.
 unvisited set.
 3. For the current node, consider all of its unvisited neighbors and calculate their tentative distances. Compare the 
 newly calculated tentative distance to the current assigned value and assign the smaller one. For example, if the 
-current node A is marked with a distance of 6, and the edge connecting it with a neighbor B has length 2, then the 
-distance to B (through A) will be 6 + 2 = 8. If B was previously marked with a distance greater than 8 then change it 
-to 8. Otherwise, keep the current value.
+current node `A` is marked with a distance of 6, and the edge connecting it with a neighbor `B` has length `2`, then 
+the distance to `B` (through `A`) will be `6 + 2 = 8`. If `B` was previously marked with a distance greater than `8` then 
+change it to `8`. Otherwise, keep the current value.
 4. When we are done considering all of the neighbors of the current node, mark the current node as visited and remove 
 it from the unvisited set. A visited node will never be checked again.
 5. If the destination node has been marked visited (when planning a route between two specific nodes) or if the 
@@ -40,8 +62,21 @@ function Dijkstra(Graph, source):
     return dist[], prev[]
 ```
 
+Minimum Spanning Trees
+======================
+A minimum spanning tree of a graph `G` is a tree that includes all the vertices of `G`, with minimal total weighting
+for its edges. Some characteristics of a minimum spanning tree include:
+
+* If there are `n` vertices in the graph, the minimum spanning tree contains `n - 1` edges
+* If every edges has a distinct weight, there will only be one possible minimum spanning tree
+* If the minimum cost edge e of a graph is unique, then this edge is included in all the minimum spanning tree
+
+There are several ways to find the minimum spanning tree of a graph. Two popular ones are Kruskal's algorithm (good 
+for the typical use case, used with disjoint sets typically), and Prim's algorithm (good for graphs with a high number
+of edges).
+
 Kruskal's Algorithm
-===================
+-------------------
 Kruskal's algorithm is a minimum-spanning-tree algorithm which finds an edge of the least possible weight that connects
 any two trees in the forest. It is a greedy algorithm in graph theory as it finds a minimum spanning tree for a 
 connected weighted graph adding increasing cost arcs at each step. This means it finds a subset of the edges that 
@@ -66,7 +101,7 @@ return A
 ```
     
 Prim's Algorithm
-================
+----------------
 Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph. This means
 it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in
 the tree is minimized. The algorithm operates by building this tree one vertex at a time, from an arbitrary starting 
