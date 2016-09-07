@@ -45,7 +45,7 @@ for i in range(n):
 Disjoint Sets
 =============
 A disjoint-set data structure, also called a union–find data structure or merge–find set, is a data structure that 
-keeps track of a set of elements partitioned into a number of disjoint (nonoverlapping) subsets. It supports two 
+keeps track of a set of elements partitioned into a number of disjoint (**non-overlapping**) subsets. It supports two 
 operations:
 
 * Find: Determine which subset a particular element is in. Find typically returns an item from this set that serves as

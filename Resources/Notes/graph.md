@@ -62,8 +62,22 @@ function Dijkstra(Graph, source):
     return dist[], prev[]
 ```
 
+Trees
+=====
+A tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any acyclic 
+connected graph is a tree. A forest is a disjoint union of trees.
+If a graph has `n` vertices, then the following conditions must be satisfied for it to be considered a tree:
+
+* It is is connected and has `n − 1` edges
+* It has no simple cycles and has `n − 1` edges
+
+Forests
+-------
+A forest is an undirected graph, all of whose connected components are trees; in other words, the graph consists of a 
+disjoint union of trees. Equivalently, a forest is an undirected acyclic graph.
+
 Minimum Spanning Trees
-======================
+----------------------
 A minimum spanning tree of a graph `G` is a tree that includes all the vertices of `G`, with minimal total weighting
 for its edges. Some characteristics of a minimum spanning tree include:
 
