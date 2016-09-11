@@ -1,4 +1,4 @@
-Contest-Programming
+Contest Programming
 ===================
 Contains all my programming work since 8/28/2016
 * All programming problems I've solved
