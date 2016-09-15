@@ -5,6 +5,7 @@ Contains all my programming work since 8/28/2016
 * Some resources (pre-built data structures)
 * Previous CCC practice solutions
 * Notes on some algorithms and data structures
+* You can see my solved problems for DMOJ at [https://dmoj.ca/user/andi_g/solved]()
 
 Notes
 -----
