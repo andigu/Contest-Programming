@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/Contest Programming.iml" filepath="$PROJECT_DIR$/Contest Programming.iml" />
       <module fileurl="file://$PROJECT_DIR$/Resources/Java/Java.iml" filepath="$PROJECT_DIR$/Resources/Java/Java.iml" />
       <module fileurl="file://$PROJECT_DIR$/Resources/Python/Python.iml" filepath="$PROJECT_DIR$/Resources/Python/Python.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DMOJ/bts16/bts16.iml" filepath="$PROJECT_DIR$/DMOJ/bts16/bts16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Codeforces/contest716/contest716.iml" filepath="$PROJECT_DIR$/Codeforces/contest716/contest716.iml" />
       <module fileurl="file://$PROJECT_DIR$/DMOJ/dp/dp.iml" filepath="$PROJECT_DIR$/DMOJ/dp/dp.iml" />
       <module fileurl="file://$PROJECT_DIR$/DMOJ/ds/ds.iml" filepath="$PROJECT_DIR$/DMOJ/ds/ds.iml" />
       <module fileurl="file://$PROJECT_DIR$/DMOJ/graph/graph.iml" filepath="$PROJECT_DIR$/DMOJ/graph/graph.iml" />
