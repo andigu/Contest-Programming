@@ -19,6 +19,14 @@ Structures that associate weights to the edges usually also provide:
 * `get_edge_value(x, y)`: returns the value associated with the edge `(x, y)`
 * `set_edge_value(x, y, v)`: sets the value associated with the edge `(x, y)` to `v`
 
+Topological Sort
+----------------
+Topological sorts are used to find what order to traverse a graph in order to ensure each node's parent is visited
+before the node itself is visited. To do a topological sort on a graph, store the order of nodes in an ordered list `A`:
+1. Find a node `x` with no dependencies
+2. Add it to the array `A`
+3. Remove `x` and all edges that start from that node
+4. Repeat until the graph has no nodes
 
 Dijkstra's Algorithm
 --------------------
