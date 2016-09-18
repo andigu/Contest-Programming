@@ -21,11 +21,11 @@ Structures that associate weights to the edges usually also provide:
 
 Topological Sort
 ----------------
-Topological sorts are used to find what order to traverse a graph in order to ensure each node's parent is visited
-before the node itself is visited. To do a topological sort on a graph, store the order of nodes in an ordered list `A`:
-1. Find a node `x` with no dependencies
+Topological sorts are used to find what order to traverse a graph in order to ensure each vertex's parent is visited
+before the vertex itself is visited. To do a topological sort on a graph, store the order of nodes in an ordered list `A`:
+1. Find a vertex `x` with no dependencies
 2. Add it to the array `A`
-3. Remove `x` and all edges that start from that node
+3. Remove `x` and all edges that start from that vertex
 4. Repeat until the graph has no nodes
 
 Dijkstra's Algorithm
@@ -33,34 +33,34 @@ Dijkstra's Algorithm
 Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph. Its procedure is as 
 follows:
 
-1. Assign to every node a tentative distance value: set it to zero for our initial node and to infinity for all other 
+1. Assign to every vertex a tentative distance value: set it to zero for our initial vertex and to infinity for all other 
 nodes.
-2. Set the initial node as current. Mark all other nodes unvisited. Create a set of all the unvisited nodes called the 
+2. Set the initial vertex as current. Mark all other nodes unvisited. Create a set of all the unvisited nodes called the 
 unvisited set.
-3. For the current node, consider all of its unvisited neighbors and calculate their tentative distances. Compare the 
+3. For the current vertex, consider all of its unvisited neighbors and calculate their tentative distances. Compare the 
 newly calculated tentative distance to the current assigned value and assign the smaller one. For example, if the 
-current node `A` is marked with a distance of 6, and the edge connecting it with a neighbor `B` has length `2`, then 
+current vertex `A` is marked with a distance of 6, and the edge connecting it with a neighbor `B` has length `2`, then 
 the distance to `B` (through `A`) will be `6 + 2 = 8`. If `B` was previously marked with a distance greater than `8` then 
 change it to `8`. Otherwise, keep the current value.
-4. When we are done considering all of the neighbors of the current node, mark the current node as visited and remove 
-it from the unvisited set. A visited node will never be checked again.
-5. If the destination node has been marked visited (when planning a route between two specific nodes) or if the 
+4. When we are done considering all of the neighbors of the current vertex, mark the current vertex as visited and remove 
+it from the unvisited set. A visited vertex will never be checked again.
+5. If the destination vertex has been marked visited (when planning a route between two specific nodes) or if the 
 smallest tentative distance among the nodes in the unvisited set is infinity (when planning a complete traversal; 
-occurs when there is no connection between the initial node and remaining unvisited nodes), then stop. The algorithm 
+occurs when there is no connection between the initial vertex and remaining unvisited nodes), then stop. The algorithm 
 has finished.
-6. Otherwise, select the unvisited node that is marked with the smallest tentative distance, set it as the new
-"current node", and go back to step 3.
+6. Otherwise, select the unvisited vertex that is marked with the smallest tentative distance, set it as the new
+"current vertex", and go back to step 3.
 
 ```
 function Dijkstra(Graph, source):
     create vertex set Q
     for each vertex v in Graph:             // Initialization
         dist[v] ← INFINITY                  // Unknown distance from source to v
-        prev[v] ← UNDEFINED                 // Previous node in optimal path from source
+        prev[v] ← UNDEFINED                 // Previous vertex in optimal path from source
         add v to Q                          // All nodes initially in Q (unvisited nodes)
     dist[source] ← 0                        // Distance from source to source
     while Q is not empty:
-        u ← vertex in Q with min dist[u]    // Source node will be selected first
+        u ← vertex in Q with min dist[u]    // Source vertex will be selected first
         remove u from Q 
         for each neighbor v of u:           // where v is still in Q.
             alt ← dist[u] + length(u, v)

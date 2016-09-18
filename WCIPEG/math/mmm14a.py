@@ -1,4 +1,3 @@
-# TODO restructure wcipeg folder to include math module
 def sieve(n):
     factors = [0] * n
     for i in range(2, n):
