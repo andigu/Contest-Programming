@@ -17,10 +17,10 @@ class BinHeap:  # Min heap
         self.size = 0
 
     def push(self, value):
-        self.shift_up(self.size)
         self.size += 1
         self.indices[value] = self.size
         self.data.append(value)
+        self.shift_up(self.size)
 
     def pop(self):
         smallest = self.data[1]
@@ -49,7 +49,7 @@ class BinHeap:  # Min heap
             index //= 2
 
     def shift_down(self, index):
-        while (index * 2) <= self.size:
+        while (index * 2) < self.size:
             mc = self.min_child(index)
             if self.data[index] > self.data[mc]:
                 self.indices[self.data[index][1]], self.indices[self.data[mc][1]] = mc, index

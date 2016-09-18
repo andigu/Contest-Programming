@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,5 +44,17 @@ public class Graph<T> {
 
     public boolean hasVertex(T id) {
         return vertices.containsKey(id);
+    }
+
+    public String toString() {
+        String result = "";
+        for (Vertex<T> vertex : vertices.values()) {
+            result += vertex.toString() + "\n";
+        }
+        return result;
+    }
+
+    public Collection<Vertex<T>> getVertices() {
+        return vertices.values();
     }
 }

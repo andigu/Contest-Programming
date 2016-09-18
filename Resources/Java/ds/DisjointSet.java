@@ -12,8 +12,6 @@ public class DisjointSet {
         size = new int[n];
         for (int i = 0; i < n; i++) {
             parent[i] = i;
-        }
-        for (int i=0; i < n; i ++) {
             size[i] = 1;
         }
     }
