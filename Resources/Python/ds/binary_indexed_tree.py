@@ -1,14 +1,16 @@
+import sys
+
+
 class BinaryIndexedTree:
     def __init__(self, array):
-        """"Initialize BIT with list in O(n)"""
         self.array = [0] + array
-        for i in range(1, len(self.array)):
+        self.size = len(self.array)
+        for i in range(1, self.size):
             i2 = i + (i & -i)
-            if i2 < len(self.array):
+            if i2 < self.size:
                 self.array[i2] += self.array[i]
 
     def prefix_query(self, i):
-        """Computes prefix sum of up to including the i-th element"""
         i += 1
         result = 0
         while i:
@@ -17,35 +19,29 @@ class BinaryIndexedTree:
         return result
 
     def range_query(self, from_i, to_i):
-        """Computes the range sum between two indices (both inclusive)"""
         return self.prefix_query(to_i) - self.prefix_query(from_i - 1)
 
     def update(self, i, add):
-        """Add a value to the idx-th element"""
         i += 1
-        while i < len(self.array):
+        while i < self.size:
             self.array[i] += add
             i += i & -i
 
+input = sys.stdin.readline
+n, m = [int(i) for i in input().split()]
+array = [int(i) for i in input().split()]
+tree = BinaryIndexedTree(array)
+for i in range(m):
+    query = input().split()
+    if query[0] == "C":
+        index, value = [int(j) for j in query[1:]]
+        index -= 1
+        tree.update(index, value - array[index])
+        array[index] = value
+    elif query[0] == "S":
+        a, b = [int(j) - 1 for j in query[1:]]
+        print(tree.range_query(a, b))
+    else:
+        a = int(query[1])
+        print(sum(x <= a for x in array))
 
-if __name__ == '__main__':
-    arr = [1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5]
-    bit = BinaryIndexedTree(arr)
-    print('Array: [{}]'.format(', '.join(map(str, arr))))
-    print()
-
-    print('Prefix sum of first {} elements: {}'.format(13, bit.prefix_query(12)))
-    print('Prefix sum of first {} elements: {}'.format(7, bit.prefix_query(6)))
-    print('Range sum from pos {} to pos {}: {}'.format(1, 5, bit.range_query(1, 5)))
-    print()
-
-    bit.update(4, 2)
-    print('Add {} to element at pos {}'.format(2, 4))
-    new_array = [bit.range_query(idx, idx) for idx in range(len(arr))]
-    print('Array: [{}]'.format(', '.join(map(str, new_array))))
-    print()
-
-    print('Prefix sum of first {} elements: {}'.format(13, bit.prefix_query(12)))
-    print('Prefix sum of first {} elements: {}'.format(7, bit.prefix_query(6)))
-    print('Range sum from pos {} to pos {}: {}'.format(1, 5, bit.range_query(1, 5)))
-    print()
