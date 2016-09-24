@@ -1,4 +1,4 @@
-package Java.ds;
+package ds;
 
 import ds.BinaryIndexedTree;
 import org.junit.Assert;
