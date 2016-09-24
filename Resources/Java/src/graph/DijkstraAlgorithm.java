@@ -23,11 +23,11 @@ public class DijkstraAlgorithm<T> {
 
     public Map<T, Double> Dijkstra(Graph<T> graph, T current) {
         Map<T, Double> distances = new HashMap<>();
-        for (Vertex<T> vertex : graph.getVertices()) {
-            distances.put(vertex.getId(), Double.POSITIVE_INFINITY);
+        for (T id : graph.getIds()) {
+            distances.put(id, Double.POSITIVE_INFINITY);
         }
         distances.put(current, 0d);
-        Set<T> unvisited = new HashSet<>(distances.keySet());
+        Set<T> unvisited = new HashSet<>(graph.getIds());
         current = smallestDist(distances, unvisited);
         while (!unvisited.isEmpty() && current != null) {
             unvisited.remove(current);

@@ -3,6 +3,7 @@ package graph;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Andi Gu
@@ -15,15 +16,11 @@ public class Graph<T> {
     }
 
     public void addVertex(T id) {
-        if (!hasVertex(id)) {
-            vertices.put(id, new Vertex<T>(id));
-        }
+        vertices.put(id, new Vertex<>(id));
     }
 
     public void removeVertex(T id) {
-        if (hasVertex(id)) {
-            vertices.remove(id);
-        }
+        vertices.remove(id);
     }
 
     public void addEdge(T vertexA, T vertexB, int weight, boolean bidirectional) {
@@ -46,8 +43,12 @@ public class Graph<T> {
         return vertices.get(vertexA).getWeight(vertices.get(vertexB));
     }
 
-    public boolean hasVertex(T id) {
-        return vertices.containsKey(id);
+    public Set<T> getIds() {
+        return vertices.keySet();
+    }
+
+    public Vertex<T> getVertex(T id) {
+        return vertices.get(id);
     }
 
     public String toString() {
@@ -60,9 +61,5 @@ public class Graph<T> {
 
     public Collection<Vertex<T>> getVertices() {
         return vertices.values();
-    }
-
-    public Vertex<T> getVertex(T id) {
-        return vertices.get(id);
     }
 }
