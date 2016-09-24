@@ -1,6 +1,3 @@
-import sys
-
-
 class BinaryIndexedTree:
     def __init__(self, array):
         self.array = [0] + array
@@ -26,22 +23,3 @@ class BinaryIndexedTree:
         while i < self.size:
             self.array[i] += add
             i += i & -i
-
-input = sys.stdin.readline
-n, m = [int(i) for i in input().split()]
-array = [int(i) for i in input().split()]
-tree = BinaryIndexedTree(array)
-for i in range(m):
-    query = input().split()
-    if query[0] == "C":
-        index, value = [int(j) for j in query[1:]]
-        index -= 1
-        tree.update(index, value - array[index])
-        array[index] = value
-    elif query[0] == "S":
-        a, b = [int(j) - 1 for j in query[1:]]
-        print(tree.range_query(a, b))
-    else:
-        a = int(query[1])
-        print(sum(x <= a for x in array))
-

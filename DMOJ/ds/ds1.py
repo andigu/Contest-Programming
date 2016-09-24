@@ -46,11 +46,8 @@ for query in tokens[2:]:
         index -= 1
         update(tree, index, value - array[index], n)
         update(tree_count, array[index], -1, largest + 1)
-        counts[array[index]] -= 1
         array[index] = value
-
         update(tree_count, value, 1, largest + 1)
-        counts[value] += 1
     elif query[0] == "S":
         a, b = [int(j) - 1 for j in query[1:]]
         print(range_query(tree, a, b))
