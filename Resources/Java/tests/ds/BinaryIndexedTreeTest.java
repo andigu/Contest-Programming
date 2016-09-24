@@ -1,6 +1,5 @@
 package ds;
 
-import ds.BinaryIndexedTree;
 import org.junit.Assert;
 import org.junit.Test;
 

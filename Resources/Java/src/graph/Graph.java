@@ -26,9 +26,13 @@ public class Graph<T> {
         }
     }
 
-    public void addEdge(T vertexA, T vertexB, int weight) {
-        if (!vertices.get(vertexA).hasNeighbour(vertices.get(vertexB))) {
-            vertices.get(vertexA).addNeighbour(vertices.get(vertexB), weight);
+    public void addEdge(T vertexA, T vertexB, int weight, boolean bidirectional) {
+        addVertex(vertexA);
+        addVertex(vertexB);
+
+        vertices.get(vertexA).addNeighbour(vertices.get(vertexB), weight);
+        if (bidirectional) {
+            vertices.get(vertexB).addNeighbour(vertices.get(vertexA));
         }
     }
 
@@ -56,5 +60,9 @@ public class Graph<T> {
 
     public Collection<Vertex<T>> getVertices() {
         return vertices.values();
+    }
+
+    public Vertex<T> getVertex(T id) {
+        return vertices.get(id);
     }
 }

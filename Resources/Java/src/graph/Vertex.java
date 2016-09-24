@@ -16,7 +16,7 @@ class Vertex<T> {
         edges = new HashMap<>();
     }
 
-    private T getId() {
+    public T getId() {
         return id;
     }
 
@@ -36,7 +36,7 @@ class Vertex<T> {
         return edges.containsKey(vertex);
     }
 
-    private Set<Vertex<T>> getNeighbours() {
+    public Set<Vertex<T>> getNeighbours() {
         return edges.keySet();
     }
 
