@@ -21,6 +21,7 @@ def range_query(tree, from_i, to_i):
         from_i -= from_i & -from_i
     return x
 
+
 def update(tree, i, add, n):
     i += 1
     while i < n:
@@ -28,32 +29,31 @@ def update(tree, i, add, n):
         i += i & -i
 
 
-input = sys.stdin.readline
-n, m = [int(i) for i in input().split()]
-n += 1
-array = [int(i) for i in input().split()]
-queries = [i.split() for i in sys.stdin.read().split("\n")][:-1]
-largest = max(max((int(i[-1]) for i in queries)), max(array))
+tokens = [i.split() for i in sys.stdin.read().split("\n")][:-1]
+n = int(tokens[0][0]) + 1
+array = [int(i) for i in tokens[1]]
+
 tree = init(array, n)
-counts = [0] + [0] * largest
+largest = 100001
+counts = [0] * largest
 for i in array:
     counts[i] += 1
-tree_count = init(counts, len(counts) + 1)
+tree_count = init(counts, largest + 1)
 
-for query in queries:
+for query in tokens[2:]:
     if query[0] == "C":
         index, value = [int(j) for j in query[1:]]
         index -= 1
         update(tree, index, value - array[index], n)
-        update(tree_count, array[index], -1, len(counts) + 1)
+        update(tree_count, array[index], -1, largest + 1)
         counts[array[index]] -= 1
         array[index] = value
 
-        update(tree_count, value, 1, len(counts) + 1)
+        update(tree_count, value, 1, largest + 1)
         counts[value] += 1
     elif query[0] == "S":
         a, b = [int(j) - 1 for j in query[1:]]
         print(range_query(tree, a, b))
     else:
         a = int(query[1])
-        print(range_query(tree_count,0,a))
+        print(range_query(tree_count, 0, a))
