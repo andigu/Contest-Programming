@@ -16,7 +16,9 @@ public class Graph<T> {
     }
 
     public void addVertex(T id) {
-        vertices.put(id, new Vertex<>(id));
+        if (!vertices.containsKey(id)) {
+            vertices.put(id, new Vertex<>(id));
+        }
     }
 
     public void removeVertex(T id) {
