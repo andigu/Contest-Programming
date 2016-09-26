@@ -34,6 +34,7 @@ public class DijkstraAlgorithmTest {
 
         DijkstraAlgorithm<Integer> algorithm = new DijkstraAlgorithm<>();
         Map<Integer, Double> result =  algorithm.Dijkstra(graph, 1);
+        System.out.println(result);
         for (Map.Entry<Integer, Double> entry : result.entrySet()) {
             int key = entry.getKey();
             Assert.assertEquals(expected.get(key), entry.getValue());
