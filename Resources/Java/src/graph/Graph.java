@@ -35,6 +35,10 @@ public class Graph<T> {
         }
     }
 
+    public void addEdge(T vertexA, T vertexB, boolean bidirectional) {
+        addEdge(vertexA, vertexB, 1, bidirectional);
+    }
+
     public void removeEdge(T vertexA, T vertexB) {
         if (vertices.get(vertexA).hasNeighbour(vertices.get(vertexB))) {
             vertices.get(vertexA).removeNeighbour(vertices.get(vertexB));
