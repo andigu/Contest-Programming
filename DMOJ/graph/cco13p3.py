@@ -8,21 +8,21 @@ import sys
 def dfs(node):
     global ans, num
     visited[node] = True
+    best_len, best_count = 0, 1
     for child in graph[node]:
         if not visited[child]:
-            dfs(child)
-            temp = dp[child] + 1
-            if temp + dp[node] > ans:
-                ans = temp + dp[node]
-                num = cnt[child] * cnt[node]
-            elif temp + dp[node] == ans:
-                num += cnt[child] * cnt[node]
-
-            if temp > dp[node]:
-                dp[node] = temp
-                cnt[node] = cnt[child]
-            elif temp == dp[node]:
-                cnt[node] += cnt[child]
+            child_len, child_count = dfs(child)
+            if child_len + best_len > ans:
+                ans = child_len + best_len
+                num = child_count * best_count
+            elif child_len + best_len == ans:
+                num += child_count * best_count
+            if child_len > best_len:
+                best_len = child_len
+                best_count = child_count
+            elif child_len == best_len:
+                best_count += child_count
+    return best_len + 1, best_count
 
 
 input = sys.stdin.readline
@@ -34,7 +34,5 @@ for i in range(n - 1):
     graph[a].add(b)
     graph[b].add(a)
 visited = [False] * n
-dp = [0] * n
-cnt = [1] * n
 dfs(0)
 print(ans + 1, num)
