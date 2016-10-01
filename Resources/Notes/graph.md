@@ -77,7 +77,7 @@ connected graph is a tree. A forest is a disjoint union of trees.
 If a graph has `n` vertices, then the following conditions must be satisfied for it to be considered a tree:
 
 * It is is connected and has `n − 1` edges
-* It has no simple cycles and has `n − 1` edges
+* It has no simple cycles
 
 Forests
 -------
