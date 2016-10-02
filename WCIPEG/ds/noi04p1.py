@@ -1,50 +1,52 @@
 import sys
-from bisect import insort
 
 
-def update(x):
-    if x != 0:
-        global size, arr, left
-        for i in range(size - 1, -1, -1):
-            arr[i] += x
-            if arr[i] < min:
-                arr = arr[i + 1:]
-                size = size - i - 1
-                left += i + 1
-                return
+def prefix_query(array, i):
+    i += 1
+    result = 0
+    while i:
+        result += array[i]
+        i -= i & -i
+    return result
 
 
-data = (i.split() for i in sys.stdin.read().strip().split("\n"))
-n, min = [int(i) for i in data.__next__()]
-arr = []
-size = 0
-left = 0
-to_add = 0
-for letter, number in data:
+def range_query(array, from_i, to_i):
+    return prefix_query(array, to_i) - prefix_query(array, from_i - 1)
+
+
+def update(array, i, add):
+    i += 1
+    while i < MAX + 1:
+        array[i] += add
+        i += i & -i
+
+
+input = sys.stdin.readline
+n, min = [int(i) for i in input().split()]
+MAX = 100000
+BIT = [0] * (MAX + 2)
+delta = 0
+lowest = 0
+for _ in range(n):
+    letter, number = input().split()
     number = int(number)
     if letter == "I" and number >= min:
-        update(to_add)
-        to_add = 0
-        insort(arr, number, 0, size)
-        size += 1
+        update(BIT, MAX - number + delta, 1)
     elif letter == "A":
-        if to_add < 0:
-            update(to_add)
-            to_add = 0
-        to_add += number
+        delta += number
     elif letter == "S":
-        to_add -= number
+        delta -= number
+        if delta < lowest:
+            lowest = delta
     elif letter == "F":
-        if to_add < 0:
-            update(to_add)
-            to_add = 0
-            if number <= size:
-                print(arr[-number])
+        lo, hi, mid = 1, MAX, -1
+        while lo < hi:
+            mid = (lo + hi) // 2
+            total = prefix_query(BIT, mid)
+            if total < number:
+                lo = mid + 1
             else:
-                print(-1)
-        else:
-            if number <= size:
-                print(arr[-number] + to_add)
-            else:
-                print(-1)
-print(left)
+                hi = mid
+        #print("", MAX - lo + delta, min - lowest, MAX - lo)
+        print(MAX - lo + delta if min - lowest <= MAX - lo else -1)
+print(range_query(BIT, MAX - (min - lowest), MAX))
