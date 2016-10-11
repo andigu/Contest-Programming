@@ -9,9 +9,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     }
 
     public RedBlackTree(T[] array) {
-        for (T data : array) {
-            insert(data);
-        }
+        super(array);
     }
 
     public void insert(T data) {
@@ -24,7 +22,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     }
 
     private void insertAdjust(RedBlackNode<T> node) {
-        node.makeRed();
+        gnode.makeRed();
         if (node.getParent() != null && node.getParent().isRed()) { // Double red problem
             RedBlackNode<T> sibling = node.getParent().getSibling(); // The current node is guaranteed to have a parent
             RedBlackNode<T> grandparent = node.getGrandparent();
@@ -32,26 +30,26 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
                 node.getParent().makeBlack();
                 sibling.makeBlack();
                 if (grandparent != null) {
-                    grandparent.makeBlack();
+                    grandparent.makeRed();
                     insertAdjust(grandparent);
                 }
             } else if (node.getParent().isLeftChild()) {
                 if (node.isRightChild()) {
-                    // rotate right, set node to parent of node
+                    rotateRight(node = node.getParent());
                 }
                 node.getParent().makeBlack();
                 if (grandparent != null) {
                     grandparent.makeRed();
-                    // rotate left on grandparent
+                    rotateLeft(grandparent);
                 }
             } else if (node.getParent().isRightChild()) {
                 if (node.isLeftChild()) {
-                    // rotate right, set node to be parent of node
+                    rotateRight(node = node.getParent());
                 }
                 node.getParent().makeBlack();
                 if (grandparent != null) {
                     grandparent.makeRed();
-                    // rotate left on grandparent
+                    rotateLeft(grandparent);
                 }
             }
         }
@@ -152,7 +150,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     }
 
     private void rotateLeft(RedBlackNode<T> node) { // rotate left on given node
-        if (node.getRight() == null) {
+        if (node.getRight() != null) {
             RedBlackNode<T> pivot = node.getRight();
             node.setRight(pivot.getLeft());
             swap(node, pivot);
