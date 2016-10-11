@@ -16,7 +16,7 @@ public class BinarySearchTreeTest {
     @Before
     public void setUp() throws Exception {
         array = new Integer[]{8, 3, 10, 1, 6, 4, 7, 14, 13, 12, 11};
-        tree = new BinarySearchTree<>(array);
+        tree = new RedBlackTree<>(array);
 
     }
 

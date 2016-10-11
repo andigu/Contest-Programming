@@ -7,7 +7,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> root;
 
     public BinarySearchTree() {
-        root = null;
+        setRoot(null);
     }
 
     public BinarySearchTree(T[] array) {
@@ -26,7 +26,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     public void insert(Node<T> node) {
         if (root == null) {
-            root = node;
+            setRoot(node);
         } else {
             Node<T> current = root;
             boolean done = false;
@@ -69,23 +69,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     public void delete(Node<T> node) {
         if (node != null) {
+            if (node.getLeft() != null && node.getRight() != null) {
+                Node<T> successor = node.getSuccessor();
+                node.setData(successor.getData());
+                node = successor;
+            }
             if (node.getLeft() == null && node.getRight() == null) {
                 replaceNodeInParent(node, null);
             } else if (node.getLeft() == null) {  // Has a right subtree but no left subtree
                 replaceNodeInParent(node, node.getRight());
-            } else if (node.getRight() == null) {
+            } else {
                 replaceNodeInParent(node, node.getLeft());
-            } else if (node.getLeft() != null && node.getRight() != null) {
-                Node<T> successor = node.getSuccessor();
-                delete(successor);
-                node.setData(successor.getData());
             }
         }
     }
 
     public void replaceNodeInParent(Node<T> nodeA, Node<T> nodeB) { // Assumes it is safe to replace nodeA
         if (nodeA.getParent() == null && nodeB == null) { // Signals to delete the root
-            root = null;
+            setRoot(null);
         }
         else {
             if (nodeA.isLeftChild()) {
@@ -116,5 +117,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
             result += getSize(node.getLeft());
         }
         return result;
+    }
+
+    public void setRoot(Node<T> node) {
+        root = node;
     }
 }

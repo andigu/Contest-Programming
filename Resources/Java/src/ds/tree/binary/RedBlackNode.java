@@ -63,4 +63,14 @@ public class RedBlackNode<T extends Comparable<T>> extends Node<T> {
     public RedBlackNode<T> getSuccessor() {
         return (RedBlackNode<T>) super.getSuccessor();
     }
+
+    public void removeFromParent() {
+        if (isLeftChild()) {
+            getParent().setLeft(null);
+        }
+        else if (isRightChild()) {
+            getParent().setRight(null);
+        }
+        setParent(null);
+    }
 }

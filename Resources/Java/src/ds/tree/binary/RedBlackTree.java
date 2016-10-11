@@ -4,10 +4,14 @@ package ds.tree.binary;
  * @author Andi Gu
  */
 public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
-    RedBlackNode<T> root;
-
     public RedBlackTree() {
-        root = null;
+        super();
+    }
+
+    public RedBlackTree(T[] array) {
+        for (T data : array) {
+            insert(data);
+        }
     }
 
     public void insert(T data) {
@@ -31,8 +35,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
                     grandparent.makeBlack();
                     insertAdjust(grandparent);
                 }
-            }
-            else if (node.getParent().isLeftChild()) {
+            } else if (node.getParent().isLeftChild()) {
                 if (node.isRightChild()) {
                     // rotate right, set node to parent of node
                 }
@@ -41,8 +44,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
                     grandparent.makeRed();
                     // rotate left on grandparent
                 }
-            }
-            else if (node.getParent().isRightChild()) {
+            } else if (node.getParent().isRightChild()) {
                 if (node.isLeftChild()) {
                     // rotate right, set node to be parent of node
                 }
@@ -53,7 +55,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
                 }
             }
         }
-        root.makeBlack();
+        getRoot().makeBlack();
     }
 
     public void delete(T data) {
@@ -62,25 +64,133 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 
     public void delete(RedBlackNode<T> node) {
         if (node != null) {
+            if (node.getLeft() != null && node.getRight() != null) {
+                RedBlackNode<T> successor = node.getSuccessor();
+                node.setData(successor.getData());
+                node = successor;
+            }
             if (node.getLeft() == null && node.getRight() == null) {
                 replaceNodeInParent(node, null);
-            } else if (node.getLeft() == null) {  // Has a right subtree but no left subtree
+                if (node.isBlack()) {
+                    deleteAdjust(node);
+                }
+            } else if (node.getLeft() == null) {
                 replaceNodeInParent(node, node.getRight());
-            } else if (node.getRight() == null) {
+                if (node.getRight().isBlack()) {
+                    deleteAdjust(node.getRight());
+                }
+            } else {
                 replaceNodeInParent(node, node.getLeft());
-            } else if (node.getLeft() != null && node.getRight() != null) {
-                Node<T> successor = node.getSuccessor();
-                delete(successor);
-                node.setData(successor.getData());
+                if (node.getLeft().isBlack()) {
+                    deleteAdjust(node.getLeft());
+                }
             }
         }
     }
 
     private void deleteAdjust(RedBlackNode<T> node) {
-
+        while (node != getRoot() && node.isBlack()) {
+            if (node == node.getParent().getLeft()) {
+                RedBlackNode<T> sibling = node.getParent().getRight();
+                if (sibling.isRed()) {
+                    sibling.makeBlack();
+                    node.getParent().makeRed();
+                    rotateLeft(node.getParent());
+                    sibling = node.getParent().getRight();
+                }
+                if (sibling.getLeft().isBlack() && sibling.getRight().isBlack()) {
+                    sibling.makeRed();
+                    node = node.getParent();
+                } else {
+                    if (sibling.getRight().isBlack()){
+                        sibling.getLeft().makeBlack();
+                        sibling.makeRed();
+                        rotateRight(sibling);
+                        sibling = node.getParent().getRight();
+                    }
+                    if (node.getParent().isBlack()) {
+                        sibling.makeBlack();
+                    } else {
+                        sibling.makeRed();
+                    }
+                    node.getParent().makeBlack();
+                    sibling.getRight().makeBlack();
+                    rotateLeft(node.getParent());
+                    node = getRoot();
+                }
+            } else {
+                RedBlackNode<T> sibling = node.getParent().getLeft();
+                if (sibling.isRed()) {
+                    sibling.makeBlack();
+                    node.getParent().makeRed();
+                    rotateRight(node.getParent());
+                    sibling = node.getParent().getLeft();
+                }
+                if (sibling.getLeft().isBlack() && sibling.getRight().isBlack()) {
+                    sibling.makeRed();
+                    node = node.getParent();
+                } else {
+                    if (sibling.getLeft().isBlack()) {
+                        sibling.getRight().makeBlack();
+                        sibling.makeRed();
+                        rotateLeft(sibling);
+                        sibling = node.getParent().getLeft();
+                    }
+                    if (node.getParent().isBlack()) {
+                        sibling.makeBlack();
+                    } else {
+                        sibling.makeRed();
+                    }
+                    node.getParent().makeBlack();
+                    sibling.getLeft().makeBlack();
+                    rotateRight(node.getParent());
+                    node = getRoot();
+                }
+            }
+        }
+        node.makeBlack();
     }
+
+    private void rotateLeft(RedBlackNode<T> node) { // rotate left on given node
+        if (node.getRight() == null) {
+            RedBlackNode<T> pivot = node.getRight();
+            node.setRight(pivot.getLeft());
+            swap(node, pivot);
+            pivot.setLeft(node);
+        }
+    }
+
+    private void rotateRight(RedBlackNode<T> node) { // rotates right on given node
+        if (node.getLeft() != null) {
+            RedBlackNode<T> pivot = node.getLeft();
+            node.setLeft(pivot.getRight());
+            swap(node, pivot);
+            pivot.setRight(node);
+        }
+    }
+
+
+    private void swap(RedBlackNode<T> node, RedBlackNode<T> pivot) { // helper function for rotations: swaps two nodes with each other
+        if (node.getParent() == null) {
+            pivot.removeFromParent();
+            setRoot(pivot);
+        } else if (node.getParent().getLeft() == node) {
+            node.getParent().setLeft(pivot);
+        } else {
+            node.getParent().setRight(pivot);
+        }
+    }
+
 
     public RedBlackNode<T> find(T data) {
         return (RedBlackNode<T>) super.find(data);
+    }
+
+    public RedBlackNode<T> getRoot() {
+        return (RedBlackNode<T>) super.getRoot();
+    }
+
+    public void setRoot(RedBlackNode<T> node) {
+        super.setRoot(node);
     }
 }
