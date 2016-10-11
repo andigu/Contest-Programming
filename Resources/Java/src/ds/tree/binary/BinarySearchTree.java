@@ -34,7 +34,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 if (node.compareTo(current) < 0) {
                     if (current.getLeft() == null) {
                         current.setLeft(node);
-                        node.setParent(current);
                         done = true;
                     } else {
                         current = current.getLeft();
@@ -42,13 +41,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 } else {
                     if (current.getRight() == null) {
                         current.setRight(node);
-                        node.setParent(current);
                         done = true;
                     } else {
                         current = current.getRight();
                     }
                 }
             }
+            node.setParent(current);
         }
     }
 
@@ -68,7 +67,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         delete(find(data));
     }
 
-    private void delete(Node<T> node) {
+    public void delete(Node<T> node) {
         if (node != null) {
             if (node.getLeft() == null && node.getRight() == null) {
                 replaceNodeInParent(node, null);
@@ -77,25 +76,26 @@ public class BinarySearchTree<T extends Comparable<T>> {
             } else if (node.getRight() == null) {
                 replaceNodeInParent(node, node.getLeft());
             } else if (node.getLeft() != null && node.getRight() != null) {
-                Node<T> successor = getSuccessor(node);
+                Node<T> successor = node.getSuccessor();
                 delete(successor);
                 node.setData(successor.getData());
             }
         }
     }
 
-    private void replaceNodeInParent(Node<T> nodeA, Node<T> nodeB) { // Assumes it is safe to replace nodeA
-        if (nodeA.getParent() != null) {
-            if (nodeA.isLeftChild()) {
-                nodeA.getParent().setLeft(nodeB);
-            } else {
-                nodeA.getParent().setRight(nodeB);
-            }
-        } else if (nodeA.getParent() == null && nodeB == null) { // Signals to delete the root
+    public void replaceNodeInParent(Node<T> nodeA, Node<T> nodeB) { // Assumes it is safe to replace nodeA
+        if (nodeA.getParent() == null && nodeB == null) { // Signals to delete the root
             root = null;
         }
-        if (nodeB != null) {
-            nodeB.setParent(nodeA.getParent());
+        else {
+            if (nodeA.isLeftChild()) {
+                nodeA.getParent().setLeft(nodeB);
+            } else if (nodeA.isRightChild()) {
+                nodeA.getParent().setRight(nodeB);
+            }
+            if (nodeB != null) {
+                nodeB.setParent(nodeA.getParent());
+            }
         }
     }
 
@@ -107,7 +107,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    private int getSize(Node node) {
+    private int getSize(Node<T> node) {
         int result = 1;
         if (node.getRight() != null) {
             result += getSize(node.getRight());
@@ -116,23 +116,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
             result += getSize(node.getLeft());
         }
         return result;
-    }
-
-    private Node<T> getSuccessor(Node<T> node) {
-        if (node == null) {
-            return null;
-        }
-        if (node.getRight() != null) {
-            node = node.getRight();
-            while (node.getLeft() != null) {
-                node = node.getLeft();
-            }
-            return node;
-        } else {
-            while (node.getParent() != null && node == node.getParent().getRight()) {
-                node = node.getParent();
-            }
-            return node.getParent();
-        }
     }
 }
