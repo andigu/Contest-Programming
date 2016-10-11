@@ -22,7 +22,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     }
 
     private void insertAdjust(RedBlackNode<T> node) {
-        gnode.makeRed();
+        node.makeRed();
         if (node.getParent() != null && node.getParent().isRed()) { // Double red problem
             RedBlackNode<T> sibling = node.getParent().getSibling(); // The current node is guaranteed to have a parent
             RedBlackNode<T> grandparent = node.getGrandparent();
