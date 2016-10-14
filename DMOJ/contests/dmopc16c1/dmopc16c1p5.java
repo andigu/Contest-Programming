@@ -1,4 +1,4 @@
-package dmopc16c1;
+package contests.dmopc16c1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
