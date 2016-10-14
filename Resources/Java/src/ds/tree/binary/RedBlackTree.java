@@ -24,13 +24,15 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 
     /**
      * There are 5 situations:
-     * - N is the root node, i.e., first node of red–black tree
-     * - N's parent (P) is black
-     * - N's parent (P) and uncle (U) are red
-     * - N is added to right of left child of grandparent, or N is added to left of right child of grandparent
-     * (P is red and U is black)
-     * - N is added to left of left child of grandparent, or N is added to right of right child of grandparent
-     * (P is red and U is black)
+     * <ul>
+     * <li> N is the root node, i.e., first node of red–black tree </li>
+     * <li> N's parent (P) is black </li>
+     * <li> N's parent (P) and uncle (U) are red </li>
+     * <li>N is added to right of left child of grandparent, or N is added to left of right child of grandparent
+     * (P is red and U is black) </li>
+     * <li> N is added to left of left child of grandparent, or N is added to right of right child of grandparent
+     * (P is red and U is black) </li>
+     * </ul>
      *
      * @param node The node that was inserted
      */
@@ -65,18 +67,16 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     }
 
     public void delete(T data) {
-        super.delete(find(data));
-    }
-
-    public void delete(RedBlackNode<T> node) {
-
+        RedBlackNode<T> node = find(data);
+        super.delete(node);
+        deleteAdjust(node);
     }
 
     private void deleteAdjust(RedBlackNode<T> node) {
 
     }
 
-    private void rotateLeft(RedBlackNode<T> node) { // rotate left on given node
+    private void rotateLeft(RedBlackNode<T> node) {
         RedBlackNode<T> pivot = node.getRight();
         if (pivot != null) {
             if (node.isLeftChild()) {
@@ -96,7 +96,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
         }
     }
 
-    private void rotateRight(RedBlackNode<T> node) { // rotates right on given node
+    private void rotateRight(RedBlackNode<T> node) {
         RedBlackNode<T> pivot = node.getLeft();
         if (pivot != null) {
             if (node.isLeftChild()) {
