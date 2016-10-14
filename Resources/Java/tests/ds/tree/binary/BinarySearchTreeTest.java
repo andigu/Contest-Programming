@@ -9,7 +9,8 @@ import org.junit.Test;
  */
 public class BinarySearchTreeTest {
     private Integer[] array;
-    private BinarySearchTree<Integer> tree;
+    private RedBlackTree<Integer> tree;
+    private RedBlackTree<Integer> emptyTree;
     private static final int MAX = 1000;
     private static final int MIN = 0;
 
@@ -17,7 +18,7 @@ public class BinarySearchTreeTest {
     public void setUp() throws Exception {
         array = new Integer[]{8, 3, 10, 1, 6, 4, 7, 14, 13, 12, 11};
         tree = new RedBlackTree<>(array);
-
+        emptyTree = new RedBlackTree<>();
     }
 
     @Test
