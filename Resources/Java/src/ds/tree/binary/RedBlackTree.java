@@ -68,24 +68,41 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 
     public void delete(T data) {
         RedBlackNode<T> node = find(data);
-        super.delete(node);
-        deleteAdjust(node);
+        if (node != null) {
+            if (node.getLeft() != null && node.getRight() != null) {
+                RedBlackNode<T> successor = node.getSuccessor();
+                node.setData(successor.getData());
+                node = successor;
+            }
+            if (node.getLeft() == null && node.getRight() == null) {
+                if (node.isBlack()) {
+                    deleteAdjust(node);
+                }
+                replaceNodeInParent(node, null);
+            } else if (node.getLeft() == null) {  // Has a right subtree but no left subtree
+                if (node.isBlack()) {
+                    deleteAdjust(node.getRight());
+                }
+                replaceNodeInParent(node, node.getRight());
+            } else {
+                if (node.isBlack()) {
+                    deleteAdjust(node.getLeft());
+                }
+                replaceNodeInParent(node, node.getLeft());
+            }
+        }
     }
 
     private void deleteAdjust(RedBlackNode<T> node) {
+        if (node.isLeftChild()) {
 
+        }
     }
 
     private void rotateLeft(RedBlackNode<T> node) {
         RedBlackNode<T> pivot = node.getRight();
         if (pivot != null) {
-            if (node.isLeftChild()) {
-                node.getParent().setLeft(pivot);
-            }
-            else if (node.isRightChild()) {
-                node.getParent().setRight(pivot);
-            }
-            pivot.setParent(node.getParent());
+            switchParents(node, pivot);
 
             node.setRight(pivot.getLeft());
             if (pivot.getLeft() != null) {
@@ -99,13 +116,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
     private void rotateRight(RedBlackNode<T> node) {
         RedBlackNode<T> pivot = node.getLeft();
         if (pivot != null) {
-            if (node.isLeftChild()) {
-                node.getParent().setLeft(pivot);
-            }
-            else if (node.isRightChild()) {
-                node.getParent().setRight(pivot);
-            }
-            pivot.setParent(node.getParent());
+            switchParents(node, pivot);
 
             node.setLeft(pivot.getRight());
             if (pivot.getRight() != null) {
@@ -114,6 +125,16 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
             pivot.setRight(node);
             node.setParent(pivot);
         }
+    }
+
+    private void switchParents(RedBlackNode<T> A, RedBlackNode<T> B) {
+        if (A.isLeftChild()) {
+            A.getParent().setLeft(B);
+        }
+        else if(A.isRightChild()) {
+            A.getParent().setRight(B);
+        }
+        B.setParent(A.getParent());
     }
 
 
