@@ -74,29 +74,73 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
                 node.setData(successor.getData());
                 node = successor;
             }
-            if (node.getLeft() == null && node.getRight() == null) {
-                if (node.isBlack()) {
-                    deleteAdjust(node);
+            RedBlackNode<T> leafChild = node.getLeft() == null ? node.getRight() : node.getLeft();
+            if (node.isBlack() && leafChild != null) {
+                if (leafChild.isBlack()) {
+                    deleteAdjust(leafChild);
                 }
-                replaceNodeInParent(node, null);
-            } else if (node.getLeft() == null) {  // Has a right subtree but no left subtree
-                if (node.isBlack()) {
-                    deleteAdjust(node.getRight());
+                else {
+                    leafChild.makeBlack();
                 }
-                replaceNodeInParent(node, node.getRight());
-            } else {
-                if (node.isBlack()) {
-                    deleteAdjust(node.getLeft());
-                }
-                replaceNodeInParent(node, node.getLeft());
             }
+            replaceNodeInParent(node, leafChild);
         }
     }
 
     private void deleteAdjust(RedBlackNode<T> node) {
-        if (node.isLeftChild()) {
+        if (node.getParent() != null) {
+            RedBlackNode<T> sibling = node.getSibling();
+            if (sibling.isRed()) {
+                node.getParent().makeRed();
+                sibling.makeBlack();
+                if (node.isLeftChild()) {
+                    rotateLeft(node.getParent());
+                }
+                else {
+                    rotateRight(node.getParent());
+                }
+            }
 
+            if (node.getParent().isBlack() && siblingCheck(sibling)) {
+                sibling.makeRed();
+                deleteAdjust(node.getParent());
+            }
+            else {
+                if (node.getParent().isRed() && siblingCheck(sibling)) {
+                    sibling.makeRed();
+                    node.getParent().makeBlack();
+                }
+                else {
+                    if (sibling.isBlack()) {
+                        if (node.isLeftChild() && sibling.getRight().isBlack() && sibling.getLeft().isRed()) {
+                            sibling.makeRed();
+                            sibling.getLeft().makeBlack();
+                            rotateRight(sibling);
+                        }
+                        else if (node.isRightChild() && sibling.getLeft().isBlack() && sibling.getRight().isRed()) {
+                            sibling.makeRed();
+                            sibling.getRight().makeBlack();
+                            rotateLeft(sibling);
+                        }
+                    }
+
+                    sibling.copyColor(node.getParent());
+                    if (node.isLeftChild()) {
+                        sibling.getRight().makeBlack();
+                        rotateLeft(node.getParent());
+                    }
+                    else {
+                        sibling.getLeft().makeBlack();
+                        rotateRight(node.getParent());
+                    }
+                }
+            }
         }
+    }
+
+
+    private boolean siblingCheck(RedBlackNode<T> sibling) { // Used twice in a certain case for deletion
+        return sibling.isBlack() && sibling.getLeft().isBlack() && sibling.getRight().isBlack();
     }
 
     private void rotateLeft(RedBlackNode<T> node) {
