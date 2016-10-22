@@ -64,13 +64,12 @@ public class RedBlackNode<T extends Comparable<T>> extends Node<T> {
         return (RedBlackNode<T>) super.getSuccessor();
     }
 
-    public void removeFromParent() {
-        if (isLeftChild()) {
-            getParent().setLeft(null);
+    public void copyColor(RedBlackNode<T> toCopy) {
+        if (toCopy == null || toCopy.isBlack()) {
+            makeBlack();
         }
-        else if (isRightChild()) {
-            getParent().setRight(null);
+        else {
+            makeRed();
         }
-        setParent(null);
     }
 }
