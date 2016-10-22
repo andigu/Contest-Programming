@@ -31,7 +31,10 @@ Use cases for matrix multiplication include:
     * The result of <code>A<sup>K</sup></code> is a `V` by `V` matrix where `(R, C)` represents the number of ways to 
     get to node `C` from node `R` in exactly **K** steps.
 * Fibonacci numbers:
-    * To find 
+    * To find fibonacci number <code>F<sub>K</sub></code>, it is possible to use matrices:
+
+<code>|1 1|*|F<sub>K-1</sub>|=|F<sub>K</sub>|</code> <br />
+<code>|1 0| |F<sub>K-2</sub>| |F<sub>K-1</sub>|</code>
 
 Gaussian Elimination
 --------------------

@@ -13,3 +13,10 @@ Notes
 ds1.py will be the solution for https://dmoj.ca/problem/ds1.
 * The majority of notes come from Wikipedia and WCIPEG's online wiki. They are for self-reference only and I don't take
 take credit for any of them.
+
+Todo
+----
+
+* [x] Expand matrix multiplication notes
+* [ ] Implement Gaussian elimination
+* [ ] Finish red black tree deletion and write tests
