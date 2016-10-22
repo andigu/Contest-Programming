@@ -69,10 +69,10 @@ public class Node<T extends Comparable<T>> {
             }
             return node;
         } else {
-            while (node.getParent() != null && node == node.getParent().getRight()) {
-                node = node.getParent();
+            while (node.parent != null && node == node.parent.getRight()) {
+                node = node.parent;
             }
-            return node.getParent();
+            return node.parent;
         }
     }
 }

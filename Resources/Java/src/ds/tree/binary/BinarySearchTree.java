@@ -74,8 +74,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 node.setData(successor.getData());
                 node = successor;
             }
-            Node<T> leafChild = node.getLeft() == null ? node.getRight() : node.getLeft();
-            replaceNodeInParent(node, leafChild);
+            if (node.getLeft() == null && node.getRight() == null) {
+                replaceNodeInParent(node, null);
+            } else if (node.getLeft() == null) {  // Has a right subtree but no left subtree
+                replaceNodeInParent(node, node.getRight());
+            } else {
+                replaceNodeInParent(node, node.getLeft());
+            }
         }
     }
 
