@@ -8,7 +8,7 @@ import org.junit.Test;
  * @author Andi Gu
  */
 public class BinarySearchTreeTest {
-    private Integer[] array;
+    private Integer[] array = {9, 2, 7, 8, 1, 3, 12, 11, 10, 90};
     private BinarySearchTree<Integer> tree;
     private BinarySearchTree<Integer> emptyTree;
     private static final int MAX = 1000;
@@ -16,13 +16,12 @@ public class BinarySearchTreeTest {
 
     @Before
     public void setUp() throws Exception {
-        array = new Integer[]{8, 3, 10, 1, 6, 4, 7, 14, 13, 12, 11};
-        tree = new RedBlackTree<>(array);
-        emptyTree = new RedBlackTree<>();
+        tree = new BinarySearchTree<>(array);
+        emptyTree = new BinarySearchTree<>();
     }
 
     @Test
-    public void insert() throws Exception {
+    public void testInsert() throws Exception {
         Assert.assertTrue(isValid(tree));
         int[] array = {8, 3, 10, 1, 6, 4, 7, 14, 13, 12, 11};
         int expectedSize = tree.getSize();
@@ -35,7 +34,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void find() throws Exception {
+    public void testFind() throws Exception {
         for (Integer i : array) {
             Assert.assertEquals(i, tree.find(i).getData());
         }
@@ -43,7 +42,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         int expectedSize = tree.getSize();
         for (Integer i : array) {
             tree.delete(i);

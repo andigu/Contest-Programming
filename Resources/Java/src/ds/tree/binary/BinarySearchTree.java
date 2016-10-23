@@ -80,8 +80,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public void replaceNodeInParent(Node<T> nodeA, Node<T> nodeB) { // Assumes it is safe to replace nodeA
-        if (nodeA.getParent() == null && nodeB == null) { // Signals to delete the root
-            setRoot(null);
+        if (nodeA.getParent() == null) {
+            if (nodeB != null) nodeB.setParent(nodeA.getParent());
+            setRoot(nodeB);
         }
         else {
             if (nodeA.isLeftChild()) {

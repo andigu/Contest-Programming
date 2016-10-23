@@ -20,3 +20,4 @@ Todo
 * [x] Expand matrix multiplication notes
 * [ ] Implement Gaussian elimination
 * [ ] Finish red black tree deletion and write tests
+* [ ] Learn tree DP
