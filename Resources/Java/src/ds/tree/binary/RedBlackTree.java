@@ -24,7 +24,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 
     /**
      * There are 5 situations:
-     * <ul>
+     * <ol>
      * <li> N is the root node, i.e., first node of red–black tree </li>
      * <li> N's parent (P) is black </li>
      * <li> N's parent (P) and uncle (U) are red </li>
@@ -32,7 +32,7 @@ public class RedBlackTree<T extends Comparable<T>> extends BinarySearchTree<T> {
      * (P is red and U is black) </li>
      * <li> N is added to left of left child of grandparent, or N is added to right of right child of grandparent
      * (P is red and U is black) </li>
-     * </ul>
+     * </ol>
      *
      * @param node The node that was inserted
      */

@@ -22,15 +22,15 @@ public class BinarySearchTreeTest {
 
     @Test
     public void testInsert() throws Exception {
-        Assert.assertTrue(isValid(tree));
+        Assert.assertTrue(isValid(emptyTree));
         int[] array = {8, 3, 10, 1, 6, 4, 7, 14, 13, 12, 11};
-        int expectedSize = tree.getSize();
+        int expectedSize = emptyTree.getSize();
         for (int i : array) {
-            tree.insert(i);
-            Assert.assertEquals(++expectedSize, tree.getSize());
-            Assert.assertTrue(isValid(tree));
+            emptyTree.insert(i);
+            Assert.assertEquals(++expectedSize, emptyTree.getSize());
+            Assert.assertTrue(isValid(emptyTree));
         }
-        Assert.assertTrue(isValid(tree));
+        Assert.assertTrue(isValid(emptyTree));
     }
 
     @Test
