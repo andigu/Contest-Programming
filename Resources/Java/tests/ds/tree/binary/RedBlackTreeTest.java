@@ -13,20 +13,21 @@ import java.util.List;
 public class RedBlackTreeTest {
     private Integer[] array = {9, 2, 7, 8, 1, 3, 12, 11, 10, 90};
     private RedBlackTree<Integer> tree;
+    private RedBlackTree<Integer> emptyTree;
 
     @Before
     public void setUp() throws Exception {
+        emptyTree = new RedBlackTree<>();
         tree = new RedBlackTree<>(array);
     }
 
-    public void propertyCheck() {
-        Assert.assertTrue(blackRoot(tree));
-        Assert.assertTrue(blackChildren(tree.getRoot()));
-        List<RedBlackNode<Integer>> leaves = new ArrayList<>();
-        findLeafNodes(tree.getRoot(), leaves);
-        int blackHeight = blackDepth(leaves.get(0));
-        for (RedBlackNode<Integer> leaf : leaves) {
-            Assert.assertEquals(blackHeight, blackDepth(leaf));
+    @Test
+    public void testInsert() {
+        int expectedSize = emptyTree.getSize();
+        for (int integer : array) {
+            propertyCheck(emptyTree);
+            emptyTree.insert(integer);
+            Assert.assertEquals(emptyTree.getSize(), ++expectedSize);
         }
     }
 
@@ -34,25 +35,42 @@ public class RedBlackTreeTest {
     public void testDelete() {
         int expectedSize = tree.getSize();
         for (int integer : array) {
-            propertyCheck();
+            propertyCheck(tree);
             tree.delete(integer);
-            try {
-                Assert.assertEquals(tree.getSize(), --expectedSize);
-            }
-            catch (AssertionError error) {
-                System.out.println("root" + tree.getRoot().getData());
-                inorder(tree.getRoot());
-                System.out.println(tree.getSize()+ " " + expectedSize);
-            }
+            Assert.assertEquals(tree.getSize(), --expectedSize);
         }
     }
 
-    public boolean blackRoot(RedBlackTree<Integer> tree) {
-        return tree.getRoot().isBlack();
+    private void propertyCheck(RedBlackTree<Integer> tree) {
+        Assert.assertTrue(blackRoot(tree));
+        Assert.assertTrue(blackChildren(tree.getRoot()));
+        List<RedBlackNode<Integer>> leaves = new ArrayList<>();
+        findLeafNodes(tree.getRoot(), leaves);
+        if (leaves.size() > 0) {
+            int blackHeight = blackDepth(leaves.get(0));
+            for (RedBlackNode<Integer> leaf : leaves) {
+                Assert.assertEquals(blackHeight, blackDepth(leaf));
+            }
+        }
+        Assert.assertTrue(height(tree.getRoot()) <= getExpectedHeight(tree));
+    }
+
+    // Every red black tree should have max height of 2 log_2(n)
+    private int getExpectedHeight(RedBlackTree<Integer> tree) {
+        return 2 * ((int) Math.round(Math.log(tree.getSize()) / Math.log(2))) + 1;
+    }
+
+    private int height(RedBlackNode<Integer> node) {
+        if (node == null) return 0;
+        return Math.max(height(node.getLeft()), height(node.getRight())) + 1;
+    }
+
+    private boolean blackRoot(RedBlackTree<Integer> tree) {
+        return tree.getRoot() == null || tree.getRoot().isBlack();
     }
 
     // Check that all children of red nodes are black
-    public boolean blackChildren(RedBlackNode<Integer> node) {
+    private boolean blackChildren(RedBlackNode<Integer> node) {
         if (node == null) {
             return true;
         }
@@ -66,7 +84,7 @@ public class RedBlackTreeTest {
         }
     }
 
-    public void findLeafNodes(RedBlackNode<Integer> node, List<RedBlackNode<Integer>> leaves) {
+    private void findLeafNodes(RedBlackNode<Integer> node, List<RedBlackNode<Integer>> leaves) {
         if (node != null) {
             if (node.getLeft() == null && node.getRight() == null) {
                 leaves.add(node);
@@ -77,7 +95,7 @@ public class RedBlackTreeTest {
         }
     }
 
-    public int blackDepth(RedBlackNode<Integer> node) {
+    private int blackDepth(RedBlackNode<Integer> node) {
         if (node == null) {
             return 0;
         }
@@ -86,14 +104,6 @@ public class RedBlackTreeTest {
         }
         else {
             return blackDepth(node.getParent());
-        }
-    }
-
-    public void inorder(RedBlackNode<Integer> node) {
-        if (node != null) {
-            inorder(node.getLeft());
-            System.out.println(node.getData());
-            inorder(node.getRight());
         }
     }
 }
