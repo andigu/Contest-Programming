@@ -1,5 +1,6 @@
+import math.MatrixMultiplier;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -7,19 +8,7 @@ import java.util.Random;
  * @author Andi Gu
  */
 public class test {
-    public int[][] multiply(int[][] A, int[][] B) {
-        int[][] result = new int[A.length][B[0].length];
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < B[0].length; j++) {
-                for (int k = 0; k < B.length; k++) {
-                    result[i][j] += A[i][k] * B[k][j];
-                }
-            }
-        }
-        return result;
-    }
-
-    public static List<int[][]> generateMatrices(int n) {
+    private static List<int[][]> generateMatrices(int n) {
         Random random = new Random();
         List<int[][]> matrices = new ArrayList<>();
         int a = 2, b = 3;
@@ -39,12 +28,9 @@ public class test {
     }
 
     public static void main(String[] args) {
-        MatrixOrderOptimization optimization = new MatrixOrderOptimization();
-        optimization.matrixChainOrder(new int[]{10, 30, 30, 5, 5, 60});
-        System.out.println(Arrays.deepToString(optimization.s));
-        optimization.printOptimalParenthesizations();
-        for (int[][] matrix : generateMatrices(3)) {
-            System.out.println(Arrays.deepToString(matrix));
-        }
+        int n = 3;
+        List<int[][]> matrices = generateMatrices(n);
+        MatrixMultiplier multiplier = new MatrixMultiplier();
+        System.out.println(multiplier.multiply(matrices.toArray(new int[][][]{})).toString());
     }
 }
