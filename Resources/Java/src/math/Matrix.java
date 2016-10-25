@@ -51,4 +51,26 @@ public class Matrix {
     public String toString() {
         return Arrays.deepToString(matrix);
     }
+
+    public boolean equals(Object object) {
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+        else {
+            Matrix matrix = (Matrix) object;
+            if (matrix.getWidth() != width || matrix.getHeight() != height) {
+                return false;
+            }
+            else {
+                boolean result = true;
+                for (int i=0; i < height; i++) {
+                    for (int j=0; j < width; j++) {
+                        result &= getData(i, j) == matrix.getData(i, j);
+                    }
+                }
+                return result;
+            }
+        }
+
+    }
 }

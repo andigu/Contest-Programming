@@ -1,5 +1,7 @@
 package math;
 
+import java.util.List;
+
 /**
  * @author Andi Gu
  */
@@ -27,6 +29,10 @@ public class MatrixMultiplier {
             }
         }
         return result;
+    }
+
+    public Matrix multiply(List<Matrix> matrices) {
+        return multiply(matrices.toArray(new Matrix[] {}));
     }
 
     public Matrix multiply(int[][][] data) {

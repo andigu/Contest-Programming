@@ -1,14 +1,27 @@
-import math.MatrixMultiplier;
+package math;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * @author Andi Gu
  */
-public class test {
-    private static List<int[][]> generateMatrices(int n) {
+public class MatrixMultiplierTest {
+    private List<Matrix> matrices;
+
+    @Before
+    public void setUp() throws Exception {
+        matrices = new ArrayList<>();
+        matrices.addAll(generateMatrices(3).stream().map(Matrix::new).collect(Collectors.toList()));
+    }
+
+    private List<int[][]> generateMatrices(int n) {
         Random random = new Random();
         List<int[][]> matrices = new ArrayList<>();
         int a = 2, b = 3;
@@ -27,10 +40,14 @@ public class test {
         return matrices;
     }
 
-    public static void main(String[] args) {
-        int n = 3;
-        List<int[][]> matrices = generateMatrices(n);
+
+    @Test
+    public void multiply() throws Exception {
+        Matrix result = matrices.get(0);
+        for (Matrix matrix : matrices.subList(1, matrices.size())) {
+            result = result.multiply(matrix);
+        }
         MatrixMultiplier multiplier = new MatrixMultiplier();
-        System.out.println(multiplier.multiply(matrices.toArray(new int[][][]{})).toString());
+        Assert.assertEquals(result, multiplier.multiply(matrices));
     }
 }
