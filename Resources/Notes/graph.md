@@ -1,5 +1,5 @@
-Graphs
-======
+# Graphs #
+
 A graph data structure consists of a set of vertices or nodes, together with a set of unordered pairs of these vertices 
 for an undirected graph or a set of ordered pairs for a directed graph. A graph data structure may also associate to 
 each edge some weight.
@@ -19,8 +19,8 @@ Structures that associate weights to the edges usually also provide:
 * `get_edge_value(x, y)`: returns the value associated with the edge `(x, y)`
 * `set_edge_value(x, y, v)`: sets the value associated with the edge `(x, y)` to `v`
 
-Topological Sort
-----------------
+## Topological Sort ##
+
 Topological sorts are used to find what order to traverse a graph in order to ensure each vertex's parent is visited
 before the vertex itself is visited. To do a topological sort on a graph, store the order of nodes in an ordered list `A`:
 1. Find a vertex `x` with no dependencies
@@ -28,8 +28,8 @@ before the vertex itself is visited. To do a topological sort on a graph, store 
 3. Remove `x` and all edges that start from that vertex
 4. Repeat until the graph has no nodes
 
-Dijkstra's Algorithm
---------------------
+## Dijkstra's Algorithm ##
+
 Dijkstra's algorithm is an algorithm for finding the shortest paths between nodes in a graph. Its procedure is as 
 follows:
 
@@ -70,8 +70,8 @@ function Dijkstra(Graph, source):
     return dist[], prev[]
 ```
 
-Trees
-=====
+# Trees #
+
 A tree is an undirected graph in which any two vertices are connected by exactly one path. In other words, any acyclic 
 connected graph is a tree. A forest is a disjoint union of trees.
 If a graph has `n` vertices, then the following conditions must be satisfied for it to be considered a tree:
@@ -79,13 +79,13 @@ If a graph has `n` vertices, then the following conditions must be satisfied for
 * It is is connected and has `n − 1` edges
 * It has no simple cycles
 
-Forests
--------
+## Forests ##
+
 A forest is an undirected graph, all of whose connected components are trees; in other words, the graph consists of a 
 disjoint union of trees. Equivalently, a forest is an undirected acyclic graph.
 
-Minimum Spanning Trees
-----------------------
+## Minimum Spanning Trees ##
+
 A minimum spanning tree of a graph `G` is a tree that includes all the vertices of `G`, with minimal total weighting
 for its edges. Some characteristics of a minimum spanning tree include:
 
@@ -97,8 +97,8 @@ There are several ways to find the minimum spanning tree of a graph. Two popular
 for the typical use case, used with disjoint sets typically), and Prim's algorithm (good for graphs with a high number
 of edges).
 
-Kruskal's Algorithm
--------------------
+### Kruskal's Algorithm ###
+
 Kruskal's algorithm is a minimum-spanning-tree algorithm which finds an edge of the least possible weight that connects
 any two trees in the forest. It is a greedy algorithm in graph theory as it finds a minimum spanning tree for a 
 connected weighted graph adding increasing cost arcs at each step. This means it finds a subset of the edges that 
@@ -122,8 +122,8 @@ foreach (u, v) in edges ordered by weight(u, v), increasing:
 return A
 ```
     
-Prim's Algorithm
-----------------
+### Prim's Algorithm ###
+
 Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph. This means
 it finds a subset of the edges that forms a tree that includes every vertex, where the total weight of all the edges in
 the tree is minimized. The algorithm operates by building this tree one vertex at a time, from an arbitrary starting 
@@ -142,3 +142,15 @@ vertices)
         1. Set `C[w]` to the cost of edge `vw`
         2. Set `E[w]` to point to edge `vw`
 4. Return `F`
+
+## Strongly Connected Components ##
+
+Strongly connected components are defined as subgraphs of a graph `G` such that there is a path between every vertex
+in that subgraph. A popular algorithm for finding the strongly connected components in a graph is Kosaraju’s algorithm.
+It runs in `O(V+E)` time, and the method is as follows:
+
+1. Create an empty stack `S` and do DFS traversal of a graph. In DFS traversal, after calling recursive DFS for adjacent
+vertices of a vertex, push the vertex to stack.
+2. Reverse directions of all arcs to obtain the transpose graph.
+3. One by one pop a vertex from `S` while `S` is not empty. Let the popped vertex be `v`. Take `v` as source and do DFS.
+The DFS starting from `v` prints strongly connected component of `v`.

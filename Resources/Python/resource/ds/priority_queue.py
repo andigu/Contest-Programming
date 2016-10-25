@@ -1,6 +1,3 @@
-from ds.binary_heap import *
-
-
 class PriorityQueue:
     def __init__(self, data=None):
         if data is not None:

@@ -1,5 +1,5 @@
-Difference Arrays
-=================
+# Difference Arrays #
+
 Given an array of numbers, we can construct a new array by replacing each element by the difference between itself 
 and the previous element, except for the first element, which we simply ignore. This is called the difference array,
 because it contains the first differences of the original array. For example, the array `[9, 2, 6, 3, 1, 5, 0 7]` is 
@@ -22,8 +22,8 @@ If we have array `A` and add an increment `k` to elements
 Thus, if we are required to update many ranges of an array in this manner, we should keep track of `D` rather than `A` 
 itself, and then integrate at the end to reconstruct `A`.
 
-Coordinate Compression
-======================
+# Coordinate Compression #
+
 Coordinate compression is a procedure that takes some points and reassigns their coordinates to remove "gaps". 
 For example, if point `P1` is located at `x = 5`, point `P2` is located at `x = 27`, and point `P3` is located at 
 `x = 65`, then, after coordinate compression, P1 may be located at `x = 0`, `P2` may be located at `x = 1`, and `P3` 
@@ -42,8 +42,8 @@ for i in range(n):
     C[i][1] = y[i]
 ```
 
-Disjoint Sets
-=============
+# Disjoint Sets #
+
 A disjoint-set data structure, also called a union–find data structure or merge–find set, is a data structure that 
 keeps track of a set of elements partitioned into a number of disjoint (**non-overlapping**) subsets. It supports two 
 operations:

@@ -1,4 +1,4 @@
-from ds.disjoint_set import DisjointSet
+from resource.ds import DisjointSet
 
 
 # Assumed graph is a structure in the form graph[{a: x b: y c: z...}, {a: m, b: n, d: o, e: p}...] where graph[i]

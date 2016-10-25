@@ -1,8 +1,9 @@
-Dynamic Programming
-===================
-Knapsack
---------
-### 0/1 Knapsack
+# Dynamic Programming #
+
+## Knapsack ##
+
+### 0/1 Knapsack ###
+
 Define `dp[i, w]` to be the maximum value that can be attained with weight less than or equal to `w` using the first `i`
 items. Definition of `dp[i, w]`: 
 * `dp[0, w] = 0`
