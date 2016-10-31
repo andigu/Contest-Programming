@@ -37,33 +37,43 @@ def solve(current, take):
         if dp[current][take] != -1 and cnt[current][take] != -1:
             return dp[current][take], cnt[current][take]
         else:
-            a, b = -float("inf"), 0
+            max_loot, ways = -float("inf"), 0
             for v in province_graph[current]:
                 if take:
                     m, n = solve(v, False)
                     m += val[current]
-                    if m > a:
-                        a = m
-                        b = n
-                    elif m == a:
-                        b += n
+                    if m > max_loot:
+                        max_loot = m
+                        ways = n
+                    elif m == max_loot:
+                        ways += n
                 else:
                     m, n = solve(v, True)
                     o, p = solve(v, False)
-                    if m > a:
-                        a = m
-                        b = n
-                    elif m == a:
-                        b += n
-                    if o > a:
-                        a = o
-                        b = p
-                    elif o == a:
-                        b += p
-            dp[current][take] = a
-            cnt[current][take] = b % 1000000007
-            return a, b
+                    if m > max_loot:
+                        max_loot = m
+                        ways = n
+                    elif m == max_loot:
+                        ways += n
+                    if o > max_loot:
+                        max_loot = o
+                        ways = p
+                    elif o == max_loot:
+                        ways += p
+            dp[current][take] = max_loot
+            cnt[current][take] = ways % 1000000007
+            return max_loot, ways
 
+
+def build_province_graph(node):
+    if not visited[node]:
+        visited[node] = True
+        if component[node] not in province_graph:
+            province_graph[component[node]] = set()
+        for v in graph[node]:
+            if component[v] != component[node]:
+                province_graph[component[node]].add(component[v])
+            build_province_graph(v)
 
 input = sys.stdin.readline
 n, m = [int(i) for i in input().split()]
@@ -86,12 +96,11 @@ for node in component:
     if component[node] not in provinces:
         provinces[component[node]] = set()
         val[component[node]] = loot[node]
-        province_graph[component[node]] = {component[v] for v in graph[node] if component[v] != component[node]}
     else:
         provinces[component[node]].add(node)
         val[component[node]] += loot[node]
-        province_graph[component[node]] = province_graph[component[node]].union(
-            {component[v] for v in graph[node] if component[v] != component[node]})
+visited = [False] * n
+build_province_graph(0)
 n = len(provinces)
 dp = {v: [-1, -1] for v in provinces.keys()}
 cnt = {v: [-1, -1] for v in provinces.keys()}
