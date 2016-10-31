@@ -146,7 +146,10 @@ vertices)
 ## Strongly Connected Components ##
 
 Strongly connected components are defined as subgraphs of a graph `G` such that there is a path between every vertex
-in that subgraph. A popular algorithm for finding the strongly connected components in a graph is Kosaraju’s algorithm.
+in that subgraph. Kosaraju's algorithm and Tarjan's Algorithm both have a an asmyptopic complexity of `O(V+E)`.
+
+### Kosaraju's Algorithm ###
+A popular algorithm for finding the strongly connected components in a graph is Kosaraju's algorithm.
 It runs in `O(V+E)` time, and the method is as follows:
 
 1. Create an empty stack `S` and do DFS traversal of a graph. In DFS traversal, after calling recursive DFS for adjacent
@@ -154,3 +157,30 @@ vertices of a vertex, push the vertex to stack.
 2. Reverse directions of all arcs to obtain the transpose graph.
 3. One by one pop a vertex from `S` while `S` is not empty. Let the popped vertex be `v`. Take `v` as source and do DFS.
 The DFS starting from `v` prints strongly connected component of `v`.
+
+### Tarjan's Algorithm ###
+* The crux of the algorithm comes in determining whether a node is the root of a strongly connected component.
+* The root node is the first node of the strongly connected component which is encountered during the depth first 
+traversal
+* To find the root, each node is given a depth search index `v.index` which numbers the nodes consecutively in the order
+in which they are discovered. In addition, each node is assigned a value of `v.lowlink` that is equal to the index 
+of some node reachable from `v` and always less than `v.index`, or equal to `v.index` if no other node is reachable 
+from `v`
+Pseudocode:
+```
+tarjan(u) {
+    DFN[u] = Low[u] = ++Index
+    Stack.push(u)
+    for each (u, v) in E
+        if (v is not visited)
+            tarjan(v)
+            Low[u] = min(Low[u], Low[v])
+        else if (v in Stack)
+            Low[u] = min(Low[u], DFN[v])
+    if (DFN[u] == Low[u])
+        repeat
+        v = Stack.pop
+        print v until (u == v)
+```
+           
+ 
