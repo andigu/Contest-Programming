@@ -1,3 +1,6 @@
+from resource.ds.binary_heap import heapify, BinHeap
+
+
 class PriorityQueue:
     def __init__(self, data=None):
         if data is not None:

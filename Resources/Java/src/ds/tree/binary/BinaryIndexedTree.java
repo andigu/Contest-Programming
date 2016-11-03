@@ -1,4 +1,4 @@
-package ds.tree;
+package ds.tree.binary;
 
 /**
  * @author Andi Gu
@@ -38,11 +38,11 @@ public class BinaryIndexedTree {
         }
     }
 
-    public void add(int i, int val) {
-        i ++;
-        while (i <= size) {
-            data[i] += val;
-            i += (-i & i);
+    public void add(int index, int value) {
+        index ++;
+        while (index <= size) {
+            data[index] += value;
+            index += (-index & index);
         }
     }
 

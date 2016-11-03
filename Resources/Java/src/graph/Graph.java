@@ -68,4 +68,8 @@ public class Graph<T> {
     public Collection<Vertex<T>> getVertices() {
         return vertices.values();
     }
+
+    public int getSize() {
+        return vertices.size();
+    }
 }

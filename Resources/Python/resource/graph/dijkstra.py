@@ -2,7 +2,7 @@
 
 import sys
 
-from resource.ds import PriorityQueue
+from resource.ds.priority_queue import *
 
 
 def dijkstra(graph, start=0, n=None):

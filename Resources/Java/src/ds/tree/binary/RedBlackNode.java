@@ -3,24 +3,24 @@ package ds.tree.binary;
 /**
  * @author Andi Gu
  */
-public class RedBlackNode<T extends Comparable<T>> extends Node<T> {
+public class RedBlackNode<E extends Comparable<E>> extends Node<E> {
     private boolean color; // true for black
 
-    public RedBlackNode(T data) {
+    public RedBlackNode(E data) {
         super(data);
         color = true;
     }
 
-    public RedBlackNode<T> getParent() {
-        return (RedBlackNode<T>) super.getParent();
+    public RedBlackNode<E> getParent() {
+        return (RedBlackNode<E>) super.getParent();
     }
 
-    public RedBlackNode<T> getRight() {
-        return (RedBlackNode<T>) super.getRight();
+    public RedBlackNode<E> getRight() {
+        return (RedBlackNode<E>) super.getRight();
     }
 
-    public RedBlackNode<T> getLeft() {
-        return (RedBlackNode<T>) super.getLeft();
+    public RedBlackNode<E> getLeft() {
+        return (RedBlackNode<E>) super.getLeft();
     }
 
     public boolean isBlack() {
@@ -39,7 +39,7 @@ public class RedBlackNode<T extends Comparable<T>> extends Node<T> {
         color = false;
     }
 
-    public RedBlackNode<T> getSibling() {
+    public RedBlackNode<E> getSibling() {
         if (getParent() == null) {
             return null;
         }
@@ -51,7 +51,7 @@ public class RedBlackNode<T extends Comparable<T>> extends Node<T> {
         }
     }
 
-    public RedBlackNode<T> getGrandparent() {
+    public RedBlackNode<E> getGrandparent() {
         if (getParent() == null) {
             return null;
         }
@@ -60,11 +60,11 @@ public class RedBlackNode<T extends Comparable<T>> extends Node<T> {
         }
     }
 
-    public RedBlackNode<T> getSuccessor() {
-        return (RedBlackNode<T>) super.getSuccessor();
+    public RedBlackNode<E> getSuccessor() {
+        return (RedBlackNode<E>) super.getSuccessor();
     }
 
-    public void copyColor(RedBlackNode<T> toCopy) {
+    public void copyColor(RedBlackNode<E> toCopy) {
         if (toCopy == null || toCopy.isBlack()) {
             makeBlack();
         }

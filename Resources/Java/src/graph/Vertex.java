@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * @author Andi Gu
  */
-class Vertex<T> {
+public class Vertex<T> {
     private T id;
     private Map<Vertex<T>, Integer> edges;
 
@@ -40,8 +40,8 @@ class Vertex<T> {
         return edges.keySet();
     }
 
-    int getWeight(Vertex<T> vertex) {
-        return hasNeighbour(vertex) ? edges.get(vertex) : -1;
+    public int getWeight(Vertex<T> neighbour) {
+        return hasNeighbour(neighbour) ? edges.get(neighbour) : -1;
     }
 
     public String toString() {
