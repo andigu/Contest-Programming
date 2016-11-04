@@ -45,11 +45,18 @@ public class Vertex<T> {
     }
 
     public String toString() {
-        String result = id + " {";
-        for (Vertex<T> vertex : getNeighbours()) {
-            result += vertex.getId() + ": " + getWeight(vertex);
+        String result = "ID: " + id + ", Neighbours {";
+        if (getNeighbours().size() == 0) {
+            result += "}";
+            return result;
         }
-        result += "}";
-        return result;
+        else {
+            for (Vertex<T> vertex : getNeighbours()) {
+                result += vertex.getId() + ": " + getWeight(vertex) + ", ";
+            }
+            result = result.substring(0, result.length() - 2);
+            result += "}";
+            return result;
+        }
     }
 }

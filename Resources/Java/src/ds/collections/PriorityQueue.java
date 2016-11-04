@@ -15,8 +15,22 @@ public class PriorityQueue<P, T> extends BinaryHeap<PriorityPair<P, T>> {
     private Comparator<P> priorityComparator;
 
     public PriorityQueue(Comparator<P> priorityComparator) {
-        index = new HashMap<>();
+        super((o1, o2) -> priorityComparator.compare(o1.getPriority(), o2.getPriority()));
         this.priorityComparator = priorityComparator;
+        index = new HashMap<>();
+    }
+
+    @Override
+    public void push(PriorityPair<P, T> value) {
+        super.push(value);
+        index.put(value.getValue(), size);
+    }
+
+    @Override
+    public PriorityPair<P, T> pop() {
+        PriorityPair<P, T> popped = super.pop();
+        index.remove(popped.getValue());
+        return popped;
     }
 
     @Override
@@ -28,24 +42,15 @@ public class PriorityQueue<P, T> extends BinaryHeap<PriorityPair<P, T>> {
         data.set(indexB, temp);
     }
 
-    @Override
-    protected int compare(int indexA, int indexB) {
-        return priorityComparator.compare(data.get(indexA).getPriority(), data.get(indexB).getPriority());
-    }
-
     public void changePriority(T element, P newPriority) {
         int index = this.index.get(element);
-        int compareResult =priorityComparator.compare(newPriority, data.get(index).getPriority());
+        int compareResult = priorityComparator.compare(newPriority, data.get(index).getPriority());
+        data.get(index).setPriority(newPriority);
         if (compareResult < 0) {
-            super.shiftUp(index);
+            shiftUp(index);
+        } else if (compareResult > 0) {
+            shiftDown(index);
         }
-        else if (compareResult > 0) {
-            super.shiftDown(index);
-        }
-    }
-
-    public P getPriority(T element) {
-        return data.get(index.get(element)).getPriority();
     }
 
     public List<PriorityPair<P, T>> getElements() {

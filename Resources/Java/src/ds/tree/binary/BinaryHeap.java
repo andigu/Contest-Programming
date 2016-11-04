@@ -11,10 +11,7 @@ import java.util.List;
 public class BinaryHeap<E> {
     protected List<E> data;
     private Comparator<E> comparator; // Comparator that returns positive if o2 > o1 gives a max heap (returns o2-o1)
-    private int size;
-
-    public BinaryHeap() {
-    }
+    protected int size;
 
     public BinaryHeap(Comparator<E> comparator) {
         data = new ArrayList<>();

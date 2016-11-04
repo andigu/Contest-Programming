@@ -19,4 +19,8 @@ public class PriorityPair<K, T> {
     public T getValue() {
         return value;
     }
+
+    public void setPriority(K priority) {
+        this.priority = priority;
+    }
 }

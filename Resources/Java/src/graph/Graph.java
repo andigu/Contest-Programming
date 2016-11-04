@@ -25,6 +25,10 @@ public class Graph<T> {
         vertices.remove(id);
     }
 
+    public void addEdge(T vertexA, T vertexB, int weight) {
+        addEdge(vertexA, vertexB, weight, true);
+    }
+
     public void addEdge(T vertexA, T vertexB, int weight, boolean bidirectional) {
         addVertex(vertexA);
         addVertex(vertexB);

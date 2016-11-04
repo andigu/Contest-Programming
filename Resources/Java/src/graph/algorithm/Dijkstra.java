@@ -5,38 +5,41 @@ import ds.collections.PriorityQueue;
 import graph.Graph;
 import graph.Vertex;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Andi Gu
  */
-public class Dijkstra<T> {
-    public Map<T, Integer> shortestDist(Graph<T> graph, T startId) {
+class Dijkstra<T> {
+    private Graph<T> graph;
+
+    Dijkstra(Graph<T> graph) {
+        this.graph = graph;
+    }
+
+    Map<T, Integer> shortestDist(T startId) {
         PriorityQueue<Integer, Vertex<T>> queue = new PriorityQueue<>(Integer::compareTo);
+        Map<T, Integer> distance = new HashMap<>();
         Set<Vertex<T>> visited = new HashSet<>();
         for (Vertex<T> vertex : graph.getVertices()) {
             queue.push(new PriorityPair<>(Integer.MAX_VALUE, vertex));
+            distance.put(vertex.getId(), Integer.MAX_VALUE);
         }
-        Vertex<T> current = graph.getVertex(startId);
-        queue.changePriority(current, 0);
-        while (visited.size() < graph.getSize()) {
+        queue.changePriority(graph.getVertex(startId), 0);
+        Vertex<T> current = queue.pop().getValue();
+        distance.put(current.getId(), 0);
+        while (!queue.isEmpty() && visited.size() < graph.getSize()) {
             for (Vertex<T> neighbour : current.getNeighbours()) {
                 if (!visited.contains(neighbour)) {
-                    int tentative = queue.getPriority(current) + current.getWeight(neighbour);
-                    if (tentative < queue.getPriority(neighbour)) {
+                    int tentative = distance.get(current.getId()) + current.getWeight(neighbour);
+                    if (tentative < distance.get(neighbour.getId())) {
                         queue.changePriority(neighbour, tentative);
+                        distance.put(neighbour.getId(), tentative);
                     }
                 }
             }
             visited.add(current);
             current = queue.pop().getValue();
-        }
-        Map<T, Integer> distance = new HashMap<>();
-        for (PriorityPair<Integer, Vertex<T>> pair : queue.getElements()) {
-            distance.put(pair.getValue().getId(), pair.getPriority());
         }
         return distance;
     }
