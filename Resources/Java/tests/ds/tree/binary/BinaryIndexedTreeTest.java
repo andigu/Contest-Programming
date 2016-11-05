@@ -2,7 +2,6 @@ package ds.tree.binary;
 
 import org.junit.Assert;
 import org.junit.Test;
-import resources.ds.tree.binary.BinaryIndexedTree;
 
 /**
  * @author Andi Gu

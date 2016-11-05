@@ -1,4 +1,4 @@
-package resources.ds;
+package ds;
 
 /**
  * @author Andi Gu

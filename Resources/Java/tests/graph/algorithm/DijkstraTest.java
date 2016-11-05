@@ -1,10 +1,9 @@
 package graph.algorithm;
 
-import resources.graph.Graph;
+import graph.Graph;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import resources.graph.algorithm.Dijkstra;
 
 import java.util.Map;
 

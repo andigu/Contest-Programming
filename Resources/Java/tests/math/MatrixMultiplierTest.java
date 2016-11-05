@@ -3,8 +3,6 @@ package math;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import resources.math.Matrix;
-import resources.math.MatrixMultiplier;
 
 import java.util.ArrayList;
 import java.util.List;
