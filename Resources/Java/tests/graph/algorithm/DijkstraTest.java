@@ -28,11 +28,11 @@ public class DijkstraTest {
 
     @Test
     public void shortestDist() throws Exception {
-        Map<Integer, Integer> result = dijkstra.shortestDist(0);
-        Assert.assertEquals(new Integer(0), result.get(0));
-        Assert.assertEquals(new Integer(2), result.get(1));
-        Assert.assertEquals(new Integer(4), result.get(2));
-        Assert.assertEquals(new Integer(Integer.MAX_VALUE), result.get(3));
+        Map<Integer, Double> result = dijkstra.shortestDist(0);
+        Assert.assertEquals(new Double(0), result.get(0));
+        Assert.assertEquals(new Double(2), result.get(1));
+        Assert.assertEquals(new Double(4), result.get(2));
+        Assert.assertEquals(new Double(Double.POSITIVE_INFINITY), result.get(3));
     }
 
 }

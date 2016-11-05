@@ -21,3 +21,4 @@ Todo
 * [x] Implement Gaussian elimination
 * [x] Finish red black tree deletion and write tests
 * [ ] Learn tree DP
+* [ ] Restructure resources folder

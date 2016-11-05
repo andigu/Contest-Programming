@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author Andi Gu
  */
-class Graph<T> {
+public class Graph<T> {
     private Map<T, Vertex<T>> vertices;
 
     public Graph() {
