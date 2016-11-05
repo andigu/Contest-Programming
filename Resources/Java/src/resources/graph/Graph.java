@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author Andi Gu
  */
-public class Graph<T> {
+class Graph<T> {
     private Map<T, Vertex<T>> vertices;
 
     public Graph() {
@@ -32,10 +32,9 @@ public class Graph<T> {
     public void addEdge(T vertexA, T vertexB, int weight, boolean bidirectional) {
         addVertex(vertexA);
         addVertex(vertexB);
-
         vertices.get(vertexA).addNeighbour(vertices.get(vertexB), weight);
         if (bidirectional) {
-            vertices.get(vertexB).addNeighbour(vertices.get(vertexA));
+            vertices.get(vertexB).addNeighbour(vertices.get(vertexA), weight);
         }
     }
 

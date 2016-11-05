@@ -67,7 +67,7 @@ public class BinaryHeap<E> {
         return size;
     }
 
-    protected int compare(int indexA, int indexB) {
+    private int compare(int indexA, int indexB) {
         return comparator.compare(data.get(indexA), data.get(indexB));
     }
 }

@@ -49,8 +49,7 @@ public class Vertex<T> {
         if (getNeighbours().size() == 0) {
             result += "}";
             return result;
-        }
-        else {
+        } else {
             for (Vertex<T> vertex : getNeighbours()) {
                 result += vertex.getId() + ": " + getWeight(vertex) + ", ";
             }
