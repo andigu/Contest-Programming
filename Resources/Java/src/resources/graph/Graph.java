@@ -1,4 +1,4 @@
-package graph;
+package resources.graph;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class Graph<T> {
 
         vertices.get(vertexA).addNeighbour(vertices.get(vertexB), weight);
         if (bidirectional) {
-            vertices.get(vertexB).addNeighbour(vertices.get(vertexA));
+            vertices.get(vertexB).addNeighbour(vertices.get(vertexA), weight);
         }
     }
 

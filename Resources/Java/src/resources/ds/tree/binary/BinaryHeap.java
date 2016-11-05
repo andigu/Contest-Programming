@@ -1,4 +1,4 @@
-package ds.tree.binary;
+package resources.ds.tree.binary;
 
 import java.util.ArrayList;
 import java.util.Comparator;

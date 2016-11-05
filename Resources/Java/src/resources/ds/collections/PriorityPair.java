@@ -1,4 +1,4 @@
-package ds.collections;
+package resources.ds.collections;
 
 /**
  * @author Andi Gu

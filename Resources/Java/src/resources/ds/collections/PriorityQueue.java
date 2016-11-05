@@ -1,10 +1,9 @@
-package ds.collections;
+package resources.ds.collections;
 
-import ds.tree.binary.BinaryHeap;
+import resources.ds.tree.binary.BinaryHeap;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +27,7 @@ public class PriorityQueue<P, T> extends BinaryHeap<PriorityPair<P, T>> {
 
     @Override
     public PriorityPair<P, T> pop() {
+        index.put(data.get(size).getValue(), 1);
         PriorityPair<P, T> popped = super.pop();
         index.remove(popped.getValue());
         return popped;
@@ -51,9 +51,5 @@ public class PriorityQueue<P, T> extends BinaryHeap<PriorityPair<P, T>> {
         } else if (compareResult > 0) {
             shiftDown(index);
         }
-    }
-
-    public List<PriorityPair<P, T>> getElements() {
-        return data;
     }
 }
