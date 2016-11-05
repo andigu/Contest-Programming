@@ -1,4 +1,4 @@
-package ds.tree.binary;
+package resources.ds.tree.binary;
 
 /**
  * @author Andi Gu

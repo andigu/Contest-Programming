@@ -1,9 +1,9 @@
-package graph.algorithm;
+package resources.graph.algorithm;
 
-import ds.collections.PriorityPair;
-import ds.collections.PriorityQueue;
-import graph.Graph;
-import graph.Vertex;
+import resources.ds.collections.PriorityPair;
+import resources.ds.collections.PriorityQueue;
+import resources.graph.Graph;
+import resources.graph.Vertex;
 
 import java.util.*;
 

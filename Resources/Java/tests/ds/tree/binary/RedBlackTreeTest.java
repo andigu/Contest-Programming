@@ -3,6 +3,8 @@ package ds.tree.binary;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import resources.ds.tree.binary.RedBlackNode;
+import resources.ds.tree.binary.RedBlackTree;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package graph;
+package resources.graph;
 
 import java.util.HashMap;
 import java.util.Map;

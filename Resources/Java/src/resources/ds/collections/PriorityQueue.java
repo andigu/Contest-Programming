@@ -1,6 +1,6 @@
-package ds.collections;
+package resources.ds.collections;
 
-import ds.tree.binary.BinaryHeap;
+import resources.ds.tree.binary.BinaryHeap;
 
 import java.util.Comparator;
 import java.util.HashMap;
