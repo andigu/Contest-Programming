@@ -28,6 +28,7 @@ public class PriorityQueue<P, T> extends BinaryHeap<PriorityPair<P, T>> {
 
     @Override
     public PriorityPair<P, T> pop() {
+        index.put(data.get(size).getValue(), 1);
         PriorityPair<P, T> popped = super.pop();
         index.remove(popped.getValue());
         return popped;
