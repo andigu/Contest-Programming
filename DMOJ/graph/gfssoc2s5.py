@@ -17,11 +17,11 @@ def strongly_connected_component(graph):
     visit(0)
     component = {}
 
-    def assign(u, root):
+    def assign(u, r):
         if u not in component:
-            component[u] = root
+            component[u] = r
             for v in graph[u]:
-                assign(v, root)
+                assign(v, r)
 
     while len(stack) > 0:
         root = stack.pop()
@@ -74,6 +74,7 @@ def build_province_graph(node):
             if component[v] != component[node]:
                 province_graph[component[node]].add(component[v])
             build_province_graph(v)
+
 
 input = sys.stdin.readline
 n, m = [int(i) for i in input().split()]

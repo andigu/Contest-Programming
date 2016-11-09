@@ -22,3 +22,6 @@ Todo
 * [x] Finish red black tree deletion and write tests
 * [ ] Learn tree DP
 * [ ] Restructure resources folder
+* [ ] Implement Tarjan's
+* [ ] Implement Bipartite graph algorithm
+* [ ] Implement simple binary operations library in python and Java, and take notes 

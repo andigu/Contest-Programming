@@ -179,8 +179,21 @@ tarjan(u) {
             Low[u] = min(Low[u], DFN[v])
     if (DFN[u] == Low[u])
         repeat
-        v = Stack.pop
-        print v until (u == v)
+            v = Stack.pop
+            print v until (u == v)
 ```
-           
- 
+
+## Bipartite Graphs ##
+
+A bipartite graph is a graph in which the set of all vertices can be divided into two parts `L` and `R` such that
+every edge in `E` is between a vertex in `L` and a vertex `R`
+* A matching in a graph is a subset `M` of `E`, such that for all vertices `v` in `V`, at most one edge of `M` is 
+incident on `v`
+* A maximum matching is a matching of maximum cardinality (maximum number of edges)
+
+### Solving Maximum Bipartite Matching ###
+
+Using the Hungarian algorithm:
+* A method that is a combinatorial optimization algorithm that solves the assignment problem in polynomial time
+* Can be used to solve maximum bipartite matching problem. Concepts used in it include:
+    * An alternating path between matching and non-matching edges
