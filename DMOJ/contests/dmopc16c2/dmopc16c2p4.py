@@ -1,3 +1,6 @@
+import sys
+
+
 def trailing(x):
     count = 0
     i = 5
@@ -5,13 +8,23 @@ def trailing(x):
         count += x // i
         i *= 5
     return count
+
+
+def f(x):
+    if x == 0:
+        return 1
+    else:
+        lo = 1
+        hi = sys.maxsize
+        while lo < hi:
+            middle = (lo + hi) // 2
+            temp = trailing(middle)
+            if temp < x:
+                lo = middle + 1
+            elif temp >= x:
+                hi = middle
+        return lo
+
+
 a, b = [int(i) for i in input().split()]
-n = 1
-ans = 0
-x = trailing(n)
-while x <= b:
-    if x >= a:
-        ans += 1
-    n += 1
-    x = trailing(n)
-print(ans)
+print(f(b + 1) - f(a))
