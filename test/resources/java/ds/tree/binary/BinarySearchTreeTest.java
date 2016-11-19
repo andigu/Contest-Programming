@@ -1,4 +1,4 @@
-package ds.tree.binary;
+package resources.java.ds.tree.binary;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package math;
+package resources.java.math;
 
 import org.junit.Assert;
 import org.junit.Before;

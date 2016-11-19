@@ -1,4 +1,4 @@
-package graph.algorithm;
+package resources.java.graph.algorithm;
 
 import resources.java.graph.Graph;
 import org.junit.Assert;
