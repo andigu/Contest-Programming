@@ -1,31 +1,27 @@
-def update(index, a, tree, value):
-    # index is index to be updated, a is input array / list, tree is BIT array, value is value to be added to original
-    # number at index location
-    add = value
-    n = len(a)
-    while index < n:
-        tree[index] += add
-        index = index + (index & (-index))
+# ALL INDEXES ARE 1-BASED
 
 
-def getsum(index, a, tree):
-    # index is location upto which you want the sum of elements from beginning
-    # tree is BIT[], a is input array / list
-    n = len(a)
+def update(i, tree, value):
+    while i < n + 1:
+        tree[i] += value
+        i += i & (-i)
+
+
+# i is the i th element in the original input array (i=3 means the 3rd element)
+def get_sum(i, tree):
     ans = 0
-    while (index > 0):
-        ans += tree[index]
-        index = index - (index & (-index))
+    while i > 0:
+        ans += tree[i]
+        i -= i & (-i)
     return ans
 
 
-n = int(input("Number of Elements in array: "))
-inputArray = list(map(int, input("Elements in array: ").split()))
+n = int(input())
+inputArray = [int(x) for x in input().split(' ')]
 inputArray.insert(0, 0)  # insert dummy node to have 1-based indexing
 
-BIT = []
-for i in range(0, n):
-    BIT.append(0)
-
-for i in range(1, n):
-    update(i, inputArray, BIT, inputArray[i])
+BIT = [0] * (n + 1)
+for i in range(1, n + 1):
+    update(i, BIT, inputArray[i])
+print(BIT)
+print(get_sum(3, BIT))
