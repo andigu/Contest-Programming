@@ -1,6 +1,4 @@
 # ALL INDEXES ARE 1-BASED
-
-
 def update(i, tree, value):
     while i < n + 1:
         tree[i] += value
